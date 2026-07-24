@@ -1,0 +1,947 @@
+/* =========================================================================
+   Rolfing LP — Joyce Cruvinel (Toronto)
+   Design system tokens implemented verbatim from rolfing_design_system.md.
+   Source-code comments are in Portuguese for the author; nothing here renders
+   as user-facing text (the page itself is English-only).
+   ========================================================================= */
+
+/* ---- Tokens ------------------------------------------------------------- */
+:root {
+  /* Cor — paleta de 6 tons nomeados */
+  --color-canvas:     #F2ECE1;  /* fundo principal — areia quente */
+  --color-mist:       #E7DFD0;  /* fundo secundário — alterna com canvas */
+  --color-ink:        #2C2820;  /* texto principal — quase-preto quente */
+  --color-taupe:      #8C7A66;  /* ícones, bordas, texto secundário/labels */
+  --color-taupe-deep: #5E5142;  /* hover/active de elementos em taupe */
+  --color-ember:      #A8663D;  /* ÚNICO acento quente — só no elemento-assinatura */
+  --olive:            #8A8F69;  /* fundo dos botões CTA (pedido do cliente) */
+  --olive-deep:       #6E7350;  /* hover de botão + palavras-chave destacadas */
+
+  /* Tons auxiliares derivados (mesma família, para superfícies de card) */
+  --color-canvas-raised: #F7F2EA; /* card claro sobre mist */
+  --color-hairless-shadow: 44 40 32; /* rgb do ink para sombras suaves */
+
+  /* Tipografia */
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Karla", -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Forma — raio de borda */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-pill: 999px;
+
+  /* Espaçamento — grid de 8px */
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 40px;
+  --space-xl: 64px;
+  --space-2xl: 96px;
+  --space-3xl: 140px;
+
+  /* Padding vertical de seção (desktop). Reduzido no mobile mais abaixo. */
+  --section-y: var(--space-3xl);
+
+  /* Largura de leitura confortável */
+  --measure: 660px;
+  --container: 1140px;
+
+  /* Header fixo */
+  --header-h: 76px;
+}
+@media (max-width: 560px) {
+  :root { --header-h: 64px; }
+}
+
+/* Mobile-first: reduz respiração (~45%) abaixo de 768px */
+@media (max-width: 768px) {
+  :root {
+    --space-2xl: 56px;
+    --space-3xl: 76px;
+    --section-y: 76px;
+  }
+}
+
+/* ---- Reset / base ------------------------------------------------------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.7;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+@media (max-width: 768px) {
+  body { font-size: 16px; }
+}
+
+img { max-width: 100%; display: block; }
+
+h1, h2, h3 {
+  margin: 0;
+  line-height: 1.12;
+}
+/* Fraunces (display) — restrito a H1/H2, conforme design system */
+h1, h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  font-optical-sizing: auto;
+}
+/* H3 (títulos de card) usam Karla, não Fraunces */
+h3 {
+  font-family: var(--font-body);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+p { margin: 0; }
+
+a { color: inherit; }
+
+strong { font-weight: 600; }
+
+/* ---- Layout helpers ----------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: clamp(20px, 5vw, 48px);
+}
+
+.section {
+  padding-block: var(--section-y);
+  position: relative;
+}
+
+/* Ritmo de seção — alterna fundo canvas / mist (sem linhas divisórias) */
+.section--canvas { background-color: var(--color-canvas); }
+.section--mist   { background-color: var(--color-mist); }
+
+.measure { max-width: var(--measure); }
+
+.stack > * + * { margin-top: var(--space-md); }
+
+/* Cabeçalho de seção padrão */
+.eyebrow {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-taupe);
+  margin: 0 0 var(--space-sm);
+}
+@media (max-width: 768px) { .eyebrow { font-size: 12px; } }
+
+.section-title {
+  font-size: clamp(26px, 4.4vw, 36px);
+  max-width: 35ch;
+  margin-bottom: 30px;
+}
+
+.lead {
+  font-size: clamp(16px, 2.4vw, 20px);
+  color: var(--color-ink);
+}
+
+.muted { color: var(--color-taupe-deep); }
+
+/* ---- Botão / CTA -------------------------------------------------------- */
+.btn {
+  --btn-bg: var(--olive);
+  --btn-fg: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  padding: 1.15em 1.9em;
+  border-radius: var(--radius-pill);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 220ms cubic-bezier(.2,.7,.2,1),
+              background-color 220ms ease,
+              box-shadow 220ms ease;
+  box-shadow: 0 1px 2px rgba(var(--color-hairless-shadow), 0.10),
+              0 10px 30px -12px rgba(var(--color-hairless-shadow), 0.35);
+  will-change: transform;
+}
+.btn:hover {
+  background: var(--olive-deep);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(var(--color-hairless-shadow), 0.12),
+              0 18px 42px -14px rgba(var(--color-hairless-shadow), 0.45);
+}
+.btn:active { transform: translateY(0); }
+
+.btn .btn__arrow {
+  transition: transform 220ms cubic-bezier(.2,.7,.2,1);
+}
+.btn:hover .btn__arrow { transform: translateX(4px); }
+
+/* Todos os botões CTA em olive (pedido do cliente) — inclusive sobre o
+   fundo escuro do CTA final. Texto branco para o melhor contraste possível. */
+.btn--light {
+  --btn-bg: var(--olive);
+  --btn-fg: #ffffff;
+}
+.btn--light:hover { --btn-bg: var(--olive-deep); background: var(--olive-deep); }
+
+/* Palavra-chave destacada — olive-deep, peso reforçado */
+.kw { color: var(--olive-deep); font-weight: 600; }
+
+/* ---- Foco de teclado visível ------------------------------------------- */
+a:focus-visible,
+.btn:focus-visible,
+summary:focus-visible {
+  outline: 3px solid var(--color-ember);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+.btn:focus-visible { outline-offset: 4px; }
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--color-ink);
+  color: var(--color-canvas);
+  padding: 12px 18px;
+  border-radius: var(--radius-sm);
+  z-index: 100;
+  text-decoration: none;
+}
+.skip-link:focus { left: 16px; top: 16px; }
+
+/* =========================================================================
+   SITE HEADER — vitrine fixa (sticky), efeito de vidro ao rolar.
+   Inspirado no header da LP da Milene: sticky, transparente, blur após
+   iniciar a rolagem; logo à esquerda, CTA pill à direita.
+   ========================================================================= */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--color-canvas);
+  border-bottom: 1px solid transparent;
+  transition: background-color 350ms ease, backdrop-filter 350ms ease,
+              -webkit-backdrop-filter 350ms ease, border-color 350ms ease,
+              box-shadow 350ms ease;
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  min-height: var(--header-h);
+}
+
+/* Estado rolado — vidro translúcido com blur, mesma família de cor do canvas */
+.site-header.is-scrolled {
+  background: rgba(242, 236, 225, 0.55);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(160%);
+  border-bottom-color: rgba(140, 122, 102, 0.16);
+  box-shadow: 0 6px 26px rgba(var(--color-hairless-shadow), 0.08);
+}
+/* Fallback sem suporte a backdrop-filter: fundo mais opaco, sem blur */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .site-header.is-scrolled { background: rgba(242, 236, 225, 0.96); }
+}
+
+/* Logo — recorte via crop (janela arredondada sobre a arte original,
+   removendo apenas a linha de legenda inferior "ROLFING STRUCTURAL
+   INTEGRATION · WELLNESS"; nada de reprocessar a imagem-fonte). */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  flex: none;
+}
+.brand-logo {
+  --logo-h: 52px;
+  --logo-w: 100px;
+  width: var(--logo-w);
+  height: var(--logo-h);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  position: relative;
+  flex: none;
+  box-shadow: 0 2px 8px rgba(var(--color-hairless-shadow), 0.12);
+}
+.brand-logo img {
+  /* Recorte por escala única derivada de --logo-w (medido via análise de
+     pixel da arte-fonte 1433×736: conteúdo útil = x[110,1350] y[36,680],
+     excluindo a legenda inferior). Todos os multiplicadores derivam da
+     mesma escala para não distorcer a proporção. */
+  position: absolute;
+  max-width: none;
+  width: calc(var(--logo-w) * 1.1557);
+  height: calc(var(--logo-w) * 0.59355);
+  top: calc(var(--logo-w) * -0.02903);
+  left: calc(var(--logo-w) * -0.08871);
+}
+@media (max-width: 560px) {
+  .brand-logo { --logo-h: 44px; --logo-w: 84px; }
+}
+
+/* CTA compacto do header (mesma pill da paleta ink/canvas, menor que o CTA de conteúdo) */
+.btn--header {
+  min-height: 44px;
+  padding: 0 1.35em;
+  font-size: 14.5px;
+}
+@media (max-width: 560px) {
+  .btn--header { min-height: 40px; padding: 0 1.1em; font-size: 13.5px; }
+}
+
+/* =========================================================================
+   1. HERO
+   ========================================================================= */
+.hero {
+  position: relative;
+  background-color: var(--color-canvas);
+  overflow: hidden;
+  padding-block: clamp(48px, 8vw, 96px) var(--section-y);
+  scroll-margin-top: var(--header-h);
+}
+
+/* Elemento-assinatura: glow radial âmbar (ocorrência 1 de 2) */
+.hero__glow {
+  position: absolute;
+  top: -8%;
+  left: 8%;
+  width: min(760px, 80vw);
+  height: min(760px, 80vw);
+  background: radial-gradient(circle at center,
+              rgba(168, 102, 61, 0.20) 0%,
+              rgba(168, 102, 61, 0.10) 34%,
+              rgba(168, 102, 61, 0) 68%);
+  filter: blur(8px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero__grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(32px, 6vw, 80px);
+  align-items: center;
+}
+
+.hero__content { max-width: 620px; }
+
+.hero__title {
+  font-size: clamp(34px, 6.2vw, 56px);
+  line-height: 1.06;
+  margin-bottom: var(--space-md);
+  letter-spacing: -0.02em;
+}
+
+.hero__subtitle {
+  font-size: clamp(17px, 2.4vw, 20px);
+  color: var(--color-taupe-deep);
+  max-width: 52ch;
+  margin-bottom: var(--space-lg);
+}
+
+/* Quick-facts 2×2 (padrão Milene) — fragmentos factuais, 1 ícone distinto por
+   fato (nunca fileira de ícones repetidos), Lucide taupe. */
+.quick-facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md) var(--space-lg);
+  margin: 0 0 var(--space-lg);
+  padding: 0;
+  list-style: none;
+  max-width: 560px;
+}
+.quick-fact {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+}
+.quick-fact__icon { color: var(--color-taupe); flex: none; margin-top: 1px; }
+.quick-fact__icon svg { width: 22px; height: 22px; display: block; }
+.quick-fact__text { font-size: 15px; line-height: 1.4; color: var(--color-ink); }
+@media (max-width: 560px) {
+  .quick-facts { grid-template-columns: 1fr; gap: var(--space-sm); }
+}
+
+/* Box de oferta compacto (proposta — a confirmar com a Joyce) */
+.offer {
+  max-width: 420px;
+  margin: 0 0 var(--space-lg);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-canvas-raised);
+  border-radius: var(--radius-md);
+  box-shadow: 0 16px 40px -30px rgba(var(--color-hairless-shadow), 0.4);
+}
+.offer__label {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--olive-deep);
+  margin: 0 0 var(--space-xs);
+}
+.offer__price {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+}
+.offer__session { font-size: 15px; color: var(--color-taupe-deep); }
+.offer__was { text-decoration: line-through; color: var(--color-taupe); font-size: 15px; }
+.offer__now { font-weight: 700; font-size: 20px; color: var(--color-ink); letter-spacing: -0.01em; }
+.offer__note { font-size: 13px; font-style: italic; color: var(--color-taupe-deep); margin-top: var(--space-xs); }
+
+.hero__cta-row { margin-bottom: var(--space-sm); }
+
+.microcopy {
+  font-size: 15px;
+  color: var(--color-taupe-deep);
+  max-width: 42ch;
+  margin-top: var(--space-md);
+}
+
+/* Trust line — três itens, sem ícones, sem cards.
+   Separador "·" fica ENTRE os itens (leading no item seguinte), nunca sobrando
+   na ponta de uma linha quebrada. No mobile empilha limpo, sem separadores. */
+.trustline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin-top: var(--space-lg);
+  list-style: none;
+  padding: 0;
+}
+.trustline li {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-taupe);
+  display: inline-flex;
+  align-items: center;
+}
+.trustline li:not(:first-child)::before {
+  content: "\00B7";
+  margin-right: 12px;
+  color: var(--color-taupe);
+  opacity: 0.65;
+  font-weight: 700;
+}
+@media (max-width: 560px) {
+  .trustline { flex-direction: column; align-items: flex-start; gap: 7px; }
+  .trustline li:not(:first-child)::before { display: none; }
+}
+
+/* Figura da hero */
+.hero__figure {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 30px 60px -30px rgba(var(--color-hairless-shadow), 0.55);
+  aspect-ratio: 4 / 5;
+  background: var(--color-mist);
+}
+.hero__figure img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: 50% 30%;
+}
+
+@media (max-width: 860px) {
+  .hero__grid { grid-template-columns: 1fr; }
+  /* Padrão Milene: no mobile a foto vem primeiro (topo), texto abaixo. */
+  .hero__media { order: -1; }
+  .hero__figure { aspect-ratio: 4 / 3; max-height: 46vh; margin-bottom: var(--space-lg); }
+  .hero__subtitle, .microcopy { max-width: 48ch; }
+  .quick-facts, .offer { max-width: none; }
+}
+
+/* =========================================================================
+   Placeholder neutro (para imagens ainda não recebidas)
+   ========================================================================= */
+.ph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-mist);
+  color: var(--color-taupe);
+  border-radius: var(--radius-md);
+}
+.ph svg { width: 40px; height: 40px; opacity: 0.7; }
+
+/* CTA reutilizável no fim das seções de conteúdo */
+.cta-block { margin-top: var(--space-xl); }
+
+/* =========================================================================
+   2. WHAT THIS COULD LOOK LIKE — benefícios
+   ========================================================================= */
+.benefits {
+  margin-top: var(--space-lg);
+  display: grid;
+  gap: var(--space-md);
+  max-width: 780px;
+}
+.benefit {
+  position: relative;
+  padding-left: var(--space-lg);
+  font-size: clamp(16px, 2.2vw, 18px);
+  color: var(--color-ink);
+}
+.benefit::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0.62em;
+  width: 18px; height: 2px;
+  background: var(--color-taupe);
+  border-radius: 2px;
+}
+.benefits-outro { margin-top: var(--space-lg); max-width: var(--measure); color: var(--color-taupe-deep); }
+
+/* =========================================================================
+   6. MEET JOYCE
+   ========================================================================= */
+.meet__grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: clamp(32px, 6vw, 72px);
+  align-items: start;
+}
+.meet__figure {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  box-shadow: 0 30px 60px -34px rgba(var(--color-hairless-shadow), 0.5);
+  position: sticky;
+  top: var(--space-xl);
+}
+.meet__figure img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 28%; }
+.meet__body { max-width: 620px; }
+.meet__body p + p { margin-top: var(--space-md); }
+.meet__body .lead { color: var(--color-ink); }
+
+@media (max-width: 860px) {
+  .meet__grid { grid-template-columns: 1fr; }
+  .meet__figure { position: relative; top: auto; aspect-ratio: 4 / 4; max-height: 68vh; }
+}
+
+/* =========================================================================
+   7. WHAT TO EXPECT — 3 passos
+   ========================================================================= */
+.expect__intro { max-width: var(--measure); }
+.expect__intro p + p { margin-top: var(--space-md); }
+
+.steps {
+  margin-top: var(--space-xl);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  counter-reset: step;
+}
+.step {
+  background: var(--color-canvas-raised);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg) var(--space-md);
+  box-shadow: 0 18px 40px -30px rgba(var(--color-hairless-shadow), 0.4);
+}
+.step__icon {
+  color: var(--color-taupe);
+  margin-bottom: var(--space-md);
+}
+.step__icon svg { width: 30px; height: 30px; display: block; }
+.step__n {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-taupe);
+  display: block;
+  margin-bottom: var(--space-xs);
+}
+.step h3 {
+  font-size: 20px;
+  margin-bottom: var(--space-xs);
+}
+.step p { font-size: 16px; color: var(--color-taupe-deep); }
+
+.expect__outro { margin-top: var(--space-xl); max-width: var(--measure); }
+
+@media (max-width: 720px) {
+  .steps { grid-template-columns: 1fr; }
+}
+
+/* =========================================================================
+   8. WHERE SESSIONS HAPPEN — 2 colunas
+   ========================================================================= */
+.where__grid {
+  margin-top: var(--space-lg);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+}
+.where__col {
+  background: var(--color-canvas-raised);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  box-shadow: 0 18px 40px -32px rgba(var(--color-hairless-shadow), 0.38);
+}
+.where__icon { color: var(--color-taupe); margin-bottom: var(--space-md); }
+.where__icon svg { width: 30px; height: 30px; display: block; }
+.where__col h3 { font-size: 22px; margin-bottom: var(--space-sm); }
+.where__col p { color: var(--color-taupe-deep); font-size: 16px; }
+
+@media (max-width: 680px) {
+  .where__grid { grid-template-columns: 1fr; }
+}
+
+/* =========================================================================
+   9. SOCIAL PROOF — seção mais pesada
+   ========================================================================= */
+.proof__intro { max-width: var(--measure); }
+
+.featured {
+  margin-top: var(--space-2xl);
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: clamp(28px, 5vw, 56px);
+  align-items: center;
+  background: var(--color-canvas-raised);
+  border-radius: var(--radius-md);
+  padding: clamp(20px, 3.4vw, 40px);
+  box-shadow: 0 30px 64px -34px rgba(var(--color-hairless-shadow), 0.45);
+}
+.featured__label {
+  font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+  font-weight: 600; color: var(--color-taupe);
+  margin-bottom: var(--space-md);
+}
+.featured__figure {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-mist);
+  box-shadow: 0 16px 40px -26px rgba(var(--color-hairless-shadow), 0.5);
+}
+.featured__figure img { width: 100%; height: auto; }
+.featured__caption {
+  font-size: 13px; color: var(--color-taupe);
+  margin-top: var(--space-sm);
+  text-align: center;
+}
+.featured blockquote {
+  margin: 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(18px, 2.3vw, 21px);
+  line-height: 1.45;
+  color: var(--color-ink);
+}
+.featured cite {
+  display: block; margin-top: var(--space-md);
+  font-family: var(--font-body); font-style: normal;
+  font-weight: 600; font-size: 16px; color: var(--color-taupe-deep);
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 780px) {
+  .featured { grid-template-columns: 1fr; }
+  .featured__media { order: -1; }
+}
+
+/* Depoimentos na íntegra (texto completo, sem edição) — coluna única,
+   largura de leitura confortável, para acomodar citações de tamanhos variados. */
+.quotes {
+  margin-top: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  max-width: 840px;
+}
+.quote {
+  background: var(--color-canvas);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  box-shadow: 0 16px 36px -30px rgba(var(--color-hairless-shadow), 0.35);
+}
+.section--canvas .quote { background: var(--color-mist); }
+.quote blockquote {
+  margin: 0; font-size: 16px; line-height: 1.65; color: var(--color-ink);
+  position: relative;
+}
+.quote cite {
+  display: block; margin-top: var(--space-md);
+  font-style: normal; font-weight: 600; font-size: 14px;
+  color: var(--color-taupe-deep); letter-spacing: 0.02em;
+}
+
+/* Galeria de fotos sem identificação */
+.gallery {
+  margin-top: var(--space-2xl);
+}
+.gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+}
+.gallery figure {
+  margin: 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-mist);
+  box-shadow: 0 16px 40px -30px rgba(var(--color-hairless-shadow), 0.4);
+}
+.gallery figure img { width: 100%; height: auto; display: block; }
+.gallery figcaption {
+  font-size: 13px; color: var(--color-taupe);
+  padding: var(--space-sm) var(--space-md);
+  text-align: center;
+}
+.gallery__disclaimer {
+  margin-top: var(--space-md);
+  text-align: center;
+  font-size: 14px;
+  color: var(--color-taupe);
+}
+@media (max-width: 620px) { .gallery__grid { grid-template-columns: 1fr; } }
+
+/* =========================================================================
+   9.5 NO PRESSURE — nota curta e silenciosa
+   ========================================================================= */
+.nopressure { text-align: center; }
+.nopressure .container { max-width: 720px; }
+.nopressure h2 { font-size: clamp(23px, 3.4vw, 30px); margin-bottom: var(--space-md); }
+.nopressure p { color: var(--color-taupe-deep); font-size: clamp(16px, 2.2vw, 18px); }
+.nopressure p + p { margin-top: var(--space-sm); }
+
+/* =========================================================================
+   10. THE INVESTMENT — pricing
+   ========================================================================= */
+.pricing__head { max-width: var(--measure); }
+
+.price-group { margin-top: var(--space-xl); }
+.price-group__title {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-taupe);
+  margin-bottom: var(--space-md);
+}
+.price-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+}
+.price-cards--home { grid-template-columns: repeat(2, 1fr); max-width: 720px; }
+
+.price-card {
+  position: relative;
+  background: var(--color-canvas-raised);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  box-shadow: 0 18px 44px -30px rgba(var(--color-hairless-shadow), 0.4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+.section--mist .price-card { background: var(--color-canvas); }
+
+.price-card__name {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--color-ink);
+}
+.price-card__meta { font-size: 14px; color: var(--color-taupe-deep); }
+.price-card__figures {
+  display: flex; align-items: baseline; gap: 12px;
+  margin-top: var(--space-xs);
+  flex-wrap: wrap;
+}
+.price-card__was {
+  color: var(--color-taupe);
+  text-decoration: line-through;
+  font-size: 16px;
+}
+.price-card__now {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(26px, 4vw, 32px);
+  color: var(--color-ink);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+.price-card__unit { font-size: 14px; color: var(--color-taupe-deep); }
+/* Sufixo "+ tax" — menor e discreto ao lado do valor grande */
+.price-card__tax {
+  font-size: 0.5em;
+  font-weight: 600;
+  color: var(--color-taupe-deep);
+  letter-spacing: 0.01em;
+  margin-left: 3px;
+}
+
+.price-card.is-recommended {
+  outline: 2px solid var(--olive);
+}
+.badge {
+  position: absolute;
+  top: calc(-1 * var(--space-xs) - 6px);
+  left: var(--space-lg);
+  background: var(--olive);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 8px 20px -8px rgba(138, 143, 105, 0.55);
+}
+
+@media (max-width: 720px) {
+  .price-cards, .price-cards--home { grid-template-columns: 1fr; }
+}
+
+.price-fee-note {
+  margin-top: var(--space-lg);
+  font-size: 15px;
+  color: var(--color-taupe-deep);
+  max-width: var(--measure);
+}
+
+.pricing__closing { margin-top: var(--space-xl); max-width: var(--measure); }
+.pricing__closing p + p { margin-top: var(--space-md); }
+.pricing__scarcity { color: var(--color-taupe-deep); font-size: 16px; }
+
+/* =========================================================================
+   11. COMMON QUESTIONS — FAQ accordion
+   ========================================================================= */
+.faq { margin-top: var(--space-lg); max-width: 820px; }
+.faq__item {
+  border-radius: var(--radius-md);
+  background: var(--color-canvas-raised);
+  margin-bottom: var(--space-sm);
+  box-shadow: 0 12px 30px -28px rgba(var(--color-hairless-shadow), 0.34);
+  overflow: hidden;
+}
+.section--mist .faq__item { background: var(--color-canvas); }
+.faq__item > summary {
+  cursor: pointer;
+  list-style: none;
+  padding: var(--space-md) var(--space-lg);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: clamp(16px, 2.2vw, 18px);
+  color: var(--color-ink);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+.faq__item > summary::-webkit-details-marker { display: none; }
+.faq__item > summary .chev { flex: none; color: var(--color-taupe); transition: transform 240ms ease; }
+.faq__item[open] > summary .chev { transform: rotate(180deg); }
+.faq__answer { padding: 0 var(--space-lg) var(--space-md); color: var(--color-taupe-deep); max-width: 66ch; }
+.faq__answer em { color: var(--color-ink); }
+
+/* =========================================================================
+   12. FINAL CTA — glow âmbar (ocorrência 2 de 2)
+   ========================================================================= */
+.finalcta {
+  position: relative;
+  background: var(--color-ink);
+  color: var(--color-canvas);
+  overflow: hidden;
+  text-align: center;
+}
+.finalcta__glow {
+  position: absolute;
+  bottom: -30%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(900px, 120vw);
+  height: min(700px, 80vw);
+  background: radial-gradient(circle at center,
+              rgba(168, 102, 61, 0.55) 0%,
+              rgba(168, 102, 61, 0.22) 32%,
+              rgba(168, 102, 61, 0) 66%);
+  filter: blur(10px);
+  pointer-events: none;
+  z-index: 0;
+}
+.finalcta .container { position: relative; z-index: 1; max-width: 760px; }
+.finalcta h2 {
+  color: #fff;
+  font-size: clamp(27px, 4.6vw, 40px);
+  margin-bottom: var(--space-lg);
+}
+.finalcta p {
+  color: rgba(242, 236, 225, 0.82);
+  font-size: clamp(16px, 2.3vw, 19px);
+  max-width: 56ch;
+  margin-inline: auto;
+}
+.finalcta p + p { margin-top: var(--space-md); }
+.finalcta .cta-block { margin-top: var(--space-xl); }
+
+/* =========================================================================
+   Footer
+   ========================================================================= */
+.site-footer {
+  background: var(--color-ink);
+  color: rgba(242, 236, 225, 0.6);
+  padding-block: var(--space-lg);
+  text-align: center;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
+.site-footer strong { color: rgba(242, 236, 225, 0.85); font-weight: 600; }
+
+/* =========================================================================
+   Reveal on scroll — respeitando prefers-reduced-motion
+   ========================================================================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 700ms cubic-bezier(.2,.7,.2,1),
+              transform 700ms cubic-bezier(.2,.7,.2,1);
+}
+.reveal.is-visible { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+  .reveal { opacity: 1; transform: none; }
+  .btn:hover { transform: none; }
+}

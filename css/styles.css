@@ -789,6 +789,239 @@ body.nav-open { overflow: hidden; }
 }
 
 /* =========================================================================
+   6.5 INSIDE A SESSION — colagem orgânica de 4 fotos
+   Contêiner com aspect-ratio fixo + peças posicionadas em % — assim a
+   composição inteira escala junto e as sobreposições nunca se desfazem.
+   Cada peça carrega as próprias coordenadas em custom properties, então
+   o layout de mobile é só uma troca de três valores.
+   ========================================================================= */
+.collage-head .section-title { max-width: 20ch; margin-inline: auto; }
+.collage-head .lead { max-width: 52ch; margin-inline: auto; }
+
+.collage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 10 / 8;
+  margin-top: clamp(44px, 7vw, 76px);
+  isolation: isolate;
+}
+
+/* Brilho âmbar difuso atrás do conjunto — dá profundidade e amarra as
+   peças como se houvesse uma fonte de luz quente por trás. */
+.collage::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: 50%;
+  top: 48%;
+  transform: translate(-50%, -50%);
+  width: 92%;
+  height: 86%;
+  background: radial-gradient(ellipse at center,
+              rgba(168, 102, 61, 0.20) 0%,
+              rgba(168, 102, 61, 0.09) 38%,
+              rgba(168, 102, 61, 0) 70%);
+  filter: blur(12px);
+  pointer-events: none;
+}
+
+.frame {
+  position: absolute;
+  /* <figure> vem com margin 1em 40px do navegador — em posicionamento
+     absoluto isso soma ao left/top e desmonta as sobreposições. */
+  margin: 0;
+  left: var(--x);
+  top: var(--y);
+  width: var(--w);
+  z-index: var(--z, 1);
+  animation: drift var(--drift-dur, 13s) ease-in-out var(--drift-delay, 2s) infinite;
+}
+
+/* Deriva quase imperceptível (±5px, ciclo longo). Sozinha ninguém nota;
+   somada ao morfar das bordas é o que faz o conjunto parecer respirar. */
+@keyframes drift {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-5px); }
+}
+
+/* A moldura em si: é ela que morfa, recorta a foto e recebe a sombra.
+   Separada de .frame porque lá o transform já está ocupado pela deriva —
+   aqui fica livre para o hover. */
+.frame__inner {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: var(--ar);
+  background: var(--color-mist);
+  box-shadow:
+    0 2px 6px rgba(var(--color-hairless-shadow), 0.06),
+    0 26px 56px -26px rgba(var(--color-hairless-shadow), 0.42);
+  animation: var(--morph) var(--morph-dur, 22s) ease-in-out infinite;
+  transition: transform 620ms cubic-bezier(.22, 1, .36, 1),
+              opacity 480ms ease,
+              filter 480ms ease;
+  will-change: border-radius;
+}
+
+.frame__inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--pos, 50% 50%);
+}
+
+/* Véu quente sobre cada foto — unifica temperaturas de luz bem diferentes
+   (a foto ao ar livre é externa e esverdeada; as de sessão são internas). */
+.frame__inner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg,
+              rgba(242, 236, 225, 0.14) 0%,
+              rgba(168, 102, 61, 0.07) 55%,
+              rgba(44, 40, 32, 0.10) 100%);
+  pointer-events: none;
+}
+
+/* Foco por contraste: ao passar o mouse em uma peça, as outras recuam. */
+.collage:hover .frame__inner {
+  opacity: 0.55;
+  filter: saturate(0.75);
+}
+.frame:hover .frame__inner {
+  opacity: 1;
+  filter: none;
+  transform: scale(1.035);
+  box-shadow:
+    0 3px 8px rgba(var(--color-hairless-shadow), 0.08),
+    0 38px 74px -28px rgba(var(--color-hairless-shadow), 0.5);
+}
+
+/* ---- Quatro assinaturas de morfagem ------------------------------------
+   Durações propositalmente sem divisor comum (19/21/23/26s): as peças
+   nunca voltam a coincidir, então o conjunto não pulsa em bloco.
+   Manter a maioria dos raios entre 32% e 46% deixa trechos de lado quase
+   retos; puxar um ou dois cantos para 58-62% cria a assimetria de pétala
+   (quatro cantos a 50% dariam uma elipse perfeita — lisa e sem caráter). */
+@keyframes morph-a {
+  0%, 100% { border-radius: 62% 38% 36% 48% / 50% 58% 34% 44%; }
+  34%      { border-radius: 44% 56% 52% 34% / 38% 42% 56% 52%; }
+  67%      { border-radius: 52% 44% 40% 60% / 58% 34% 48% 38%; }
+}
+@keyframes morph-b {
+  0%, 100% { border-radius: 58% 42% 32% 52% / 44% 54% 38% 48%; }
+  34%      { border-radius: 36% 60% 50% 38% / 56% 36% 52% 40%; }
+  67%      { border-radius: 48% 34% 58% 44% / 34% 50% 44% 56%; }
+}
+@keyframes morph-c {
+  0%, 100% { border-radius: 54% 46% 38% 60% / 30% 36% 62% 68%; }
+  34%      { border-radius: 42% 58% 52% 44% / 38% 28% 70% 60%; }
+  67%      { border-radius: 60% 40% 44% 52% / 26% 34% 64% 72%; }
+}
+@keyframes morph-d {
+  0%, 100% { border-radius: 40% 60% 54% 34% / 52% 38% 46% 56%; }
+  34%      { border-radius: 56% 36% 42% 58% / 36% 54% 58% 40%; }
+  67%      { border-radius: 34% 52% 60% 46% / 48% 44% 34% 52%; }
+}
+
+/* ---- Posições: desktop --------------------------------------------------
+   B é a peça-charneira: cruza o centro na horizontal e encosta ao mesmo
+   tempo em A (à esquerda) e em C (à direita), costurando as três numa massa
+   só. D fecha embaixo, tocando B e C — o percurso do olho é A → B → C → D. */
+.frame--a {
+  --x: 2%;  --y: 10%; --w: 42%; --z: 4;
+  --ar: 810 / 838;   --pos: 50% 36%;
+  --morph: morph-a;  --morph-dur: 23s;
+  --drift-dur: 13s;  --drift-delay: 1.2s;
+}
+.frame--b {
+  --x: 36%; --y: 46%; --w: 34%; --z: 2;
+  --ar: 3 / 2;       --pos: 58% 52%;
+  --morph: morph-b;  --morph-dur: 19s;
+  --drift-dur: 15s;  --drift-delay: 2.1s;
+}
+.frame--c {
+  --x: 63%; --y: 2%;  --w: 32%; --z: 1;
+  --ar: 804 / 1600;  --pos: 50% 40%;
+  --morph: morph-c;  --morph-dur: 26s;
+  --drift-dur: 17s;  --drift-delay: 1.7s;
+}
+.frame--d {
+  --x: 48%; --y: 70%; --w: 32%; --z: 3;
+  --ar: 3 / 2;       --pos: 42% 45%;
+  --morph: morph-d;  --morph-dur: 21s;
+  --drift-dur: 14s;  --drift-delay: 2.6s;
+}
+
+/* ---- Ornamentos — preenchem o vazio inferior esquerdo e o intervalo
+   entre A e C no topo, para o arranjo não ficar com buracos. ---------- */
+.collage__ornament { position: absolute; pointer-events: none; z-index: 0; }
+
+/* Contorno vazado: repete a linguagem das molduras sem trazer mais foto. */
+.collage__ring {
+  left: 4%;
+  top: 70%;
+  width: 15%;
+  aspect-ratio: 1;
+  border: 1.5px solid rgba(140, 122, 102, 0.42);
+  animation: morph-b 24s ease-in-out infinite;
+}
+
+.collage__squiggle {
+  left: 12%;
+  top: 80%;
+  width: 28%;
+}
+.collage__squiggle path {
+  fill: none;
+  stroke: var(--olive);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  opacity: 0.55;
+}
+
+.collage__dot { border-radius: 50%; }
+.collage__dot--1 { left: 51%; top: 12%; width: 11px; height: 11px; background: var(--color-ember); opacity: .8; }
+.collage__dot--2 { left: 56%; top: 20%; width: 6px;  height: 6px;  background: var(--olive);        opacity: .75; }
+.collage__dot--3 { left: 3%;  top: 92%; width: 14px; height: 14px; background: var(--olive);        opacity: .5; }
+.collage__dot--4 { left: 42%; top: 92%; width: 7px;  height: 7px;  background: var(--color-ember);  opacity: .7; }
+.collage__dot--5 { left: 91%; top: 91%; width: 9px;  height: 9px;  background: var(--color-taupe);  opacity: .55; }
+
+/* ---- Mobile: mesmo sistema, outra pauta ---------------------------------
+   A composição em leque não cabe num telão vertical, então o contêiner
+   fica alto e as peças descem em zigue-zague, ainda se tocando duas a duas. */
+@media (max-width: 760px) {
+  .collage { aspect-ratio: 10 / 15; margin-top: clamp(36px, 9vw, 56px); }
+
+  .frame--a { --x: 0%;  --y: 2%;  --w: 68%; }
+  .frame--b { --x: 2%;  --y: 40%; --w: 56%; }
+  .frame--c { --x: 55%; --y: 30%; --w: 40%; }
+  .frame--d { --x: 30%; --y: 74%; --w: 56%; }
+
+  /* Sem cursor não existe hover: o realce por contraste sairia de cena de
+     qualquer jeito, mas o :hover "grudado" do toque deixaria as outras
+     peças apagadas. Melhor desligar. */
+  .collage:hover .frame__inner { opacity: 1; filter: none; }
+  .frame:hover .frame__inner { transform: none; }
+
+  /* Ornamentos vão para os dois vazios que sobram no empilhamento vertical:
+     o canto superior direito (acima de C) e a faixa esquerda abaixo de B. */
+  .collage__ring     { left: 72%; top: 2%;  width: 20%; }
+  .collage__squiggle { left: 1%;  top: 82%; width: 28%; }
+
+  .collage__dot--1 { left: 76%; top: 19%; }
+  .collage__dot--2 { left: 88%; top: 25%; }
+  .collage__dot--3 { left: 6%;  top: 93%; }
+  .collage__dot--4 { left: 19%; top: 97%; }
+  .collage__dot--5 { left: 8%;  top: 71%; }
+}
+
+@media (max-width: 400px) {
+  /* Abaixo de 400px o conjunto começa a se comprimir: aumenta o pé-direito
+     do contêiner para as peças voltarem a ter ar entre si. */
+  .collage { aspect-ratio: 10 / 16; }
+}
+
+/* =========================================================================
    7. WHAT TO EXPECT — 3 passos
    ========================================================================= */
 .expect__intro { max-width: var(--measure); }
@@ -1457,4 +1690,12 @@ body.nav-open { overflow: hidden; }
   * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
   .reveal { opacity: 1; transform: none; }
   .btn:hover { transform: none; }
+
+  /* A regra acima já zera a duração de toda animação, mas "infinite" com
+     duração ~0 pisca em vez de simplesmente parar — a colagem precisa de
+     um "none" explícito, parada numa forma orgânica fixa (não numa elipse). */
+  .frame, .frame__inner, .collage__ring { animation: none !important; }
+  .frame__inner { border-radius: 52% 48% 47% 53% / 48% 50% 50% 52%; }
+  .frame--c .frame__inner { border-radius: 46% 54% 43% 57% / 32% 36% 64% 68%; }
+  .collage__ring { border-radius: 48% 52% 62% 38% / 55% 43% 57% 45%; }
 }

@@ -172,6 +172,76 @@
     </section>
 
     <!-- ===================================================================
+         3.5 INSIDE A SESSION — organic photo collage
+         =================================================================== -->
+    <section class="section section--canvas" aria-labelledby="collage-title">
+      <div class="container">
+        <div class="collage-head">
+          <p class="eyebrow reveal">Inside a session</p>
+          <h2 class="section-title reveal" id="collage-title">Hands That Read <span class="kw">the Whole Pattern</span>, Not Just the Sore Spot</h2>
+          <p class="lead reveal" style="margin-top:var(--space-md);">A closer look at what those hands are actually doing — reading tension across the whole body, instead of chasing the one spot that hurts.</p>
+        </div>
+
+        <!-- Colagem de 4 fotos com molduras orgânicas que se transformam
+             continuamente (ver CSS). Ordem no DOM = ordem de leitura para
+             quem usa leitor de tela; a ordem visual vem do z-index em
+             custom properties, não da ordem dos elementos. -->
+        <div class="collage reveal">
+
+          <!-- Ornamentos primeiro: ficam atrás de tudo (z-index 0). -->
+          <div class="collage__ornament collage__ring" aria-hidden="true"></div>
+
+          <svg class="collage__ornament collage__squiggle" viewBox="0 0 200 120" fill="none" aria-hidden="true">
+            <path d="M4 96 C 30 58, 54 130, 86 86 S 142 38, 196 74" />
+          </svg>
+
+          <span class="collage__ornament collage__dot collage__dot--1" aria-hidden="true"></span>
+          <span class="collage__ornament collage__dot collage__dot--2" aria-hidden="true"></span>
+          <span class="collage__ornament collage__dot collage__dot--3" aria-hidden="true"></span>
+          <span class="collage__ornament collage__dot collage__dot--4" aria-hidden="true"></span>
+          <span class="collage__ornament collage__dot collage__dot--5" aria-hidden="true"></span>
+
+          <!-- A — o rosto. Maior peça, canto superior esquerdo, por cima de todas. -->
+          <figure class="frame frame--a">
+            <div class="frame__inner">
+              <img src="assets/img/joyce-outdoor.jpg"
+                   alt="Joyce Cruvinel, Certified Rolfer, smiling outdoors."
+                   width="810" height="838" loading="lazy" />
+            </div>
+          </figure>
+
+          <!-- B — detalhe: mãos trabalhando a perna. Peça-charneira do arranjo. -->
+          <figure class="frame frame--b">
+            <div class="frame__inner">
+              <img src="assets/img/session-hands-leg.jpg"
+                   alt="Joyce&rsquo;s hands working a client&rsquo;s leg during a session."
+                   width="1600" height="1066" loading="lazy" />
+            </div>
+          </figure>
+
+          <!-- C — plano aberto vertical: Joyce em pé junto à maca. -->
+          <figure class="frame frame--c">
+            <div class="frame__inner">
+              <img src="assets/img/session-standing.jpg"
+                   alt="Joyce standing at the table, working a client&rsquo;s back during a session."
+                   width="804" height="1600" loading="lazy" />
+            </div>
+          </figure>
+
+          <!-- D — detalhe: mão sob a escápula. -->
+          <figure class="frame frame--d">
+            <div class="frame__inner">
+              <img src="assets/img/session-hands-scapula.jpg"
+                   alt="Joyce&rsquo;s hand working under a client&rsquo;s shoulder blade during a session."
+                   width="1600" height="1066" loading="lazy" />
+            </div>
+          </figure>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
          4. WHAT TO EXPECT
          =================================================================== -->
     <section class="section section--mist" id="session" aria-labelledby="expect-title">

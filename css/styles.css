@@ -1317,6 +1317,19 @@ body.nav-open { overflow: hidden; }
   grid-template-columns: repeat(2, 1fr);
   gap: var(--space-md);
 }
+/* Se sobrar só uma foto (a segunda foi comentada a pedido da cliente),
+   centraliza num card de largura contida em vez de deixar meia grade vazia.
+   Volta ao layout padrão sozinho se uma segunda foto for reinserida. */
+.gallery__grid figure:only-child {
+  grid-column: 1 / -1;
+  /* Sem "width" explícita, a margin-inline:auto desliga o stretch padrão do
+     grid e o item volta a encolher para o conteúdo — como a foto por baixo
+     é width:100%, isso gera um tamanho circular minúsculo. width:100% aqui
+     resolve contra a faixa inteira (1044px) antes do max-width entrar. */
+  width: 100%;
+  max-width: 520px;
+  margin-inline: auto;
+}
 .gallery figure {
   margin: 0;
   border-radius: var(--radius-md);

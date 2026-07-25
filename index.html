@@ -40,7 +40,8 @@
       <nav class="site-nav" id="primaryNav" aria-label="Primary">
         <ul class="site-nav__list">
           <li><a class="site-nav__link" href="#about">About</a></li>
-          <li><a class="site-nav__link" href="#session">The Session</a></li>
+          <!-- "The Session" section is hidden (client's request) — link commented out with it. -->
+          <!-- <li><a class="site-nav__link" href="#session">The Session</a></li> -->
           <li><a class="site-nav__link" href="#testimonials">Reviews</a></li>
           <li><a class="site-nav__link" href="#location">Location</a></li>
           <li><a class="site-nav__link" href="#pricing">Pricing</a></li>
@@ -243,8 +244,13 @@
 
     <!-- ===================================================================
          4. WHAT TO EXPECT
+         Cliente pediu para tirar esta seção do ar por enquanto (pode
+         voltar adaptada depois) — "hidden" some com ela (display:none)
+         sem apagar o conteúdo. O link "The Session" no menu também está
+         comentado logo acima do <nav>, para não sobrar um item que não
+         leva a lugar nenhum.
          =================================================================== -->
-    <section class="section section--mist" id="session" aria-labelledby="expect-title">
+    <section class="section section--mist" id="session" aria-labelledby="expect-title" hidden>
       <div class="container">
         <p class="eyebrow reveal">What to expect</p>
         <h2 class="section-title reveal" id="expect-title">What a Session Actually Looks Like</h2>
@@ -381,12 +387,15 @@
                    loading="lazy" />
               <figcaption>Client photo, shared with permission.</figcaption>
             </figure>
+            <!-- Segunda foto removida a pedido da cliente. Arquivo continua em
+                 assets/img/gallery-2.jpg — basta descomentar para trazer de volta.
             <figure>
               <img src="assets/img/gallery-2.jpg"
                    alt="Another client&rsquo;s posture seen from behind, before and after Rolfing sessions."
                    loading="lazy" />
               <figcaption>Client photo, shared with permission.</figcaption>
             </figure>
+            -->
           </div>
           <p class="gallery__disclaimer">Results vary from person to person.</p>
         </div>

@@ -63,6 +63,17 @@
       <div class="hero__grid">
         <div class="hero__content">
           <p class="eyebrow">Toronto · Rolfing Structural Integration</p>
+
+          <!-- Cópia reduzida do diagrama, só no mobile: flutua à direita do H1
+               como complemento visual (o texto do título contorna a figura).
+               No desktop quem aparece é a cópia em .hero__diagram, na coluna
+               da direita. Mesmo arquivo nas duas, então não há download extra. -->
+          <figure class="hero__diagram-figure hero__title-diagram">
+            <img src="assets/img/posture-alignment-diagram.png"
+                 alt="Diagram comparing a body unevenly supported by mismatched, tilted blocks to one aligned along a single straight vertical line — illustrating the postural realignment Rolfing works toward."
+                 width="493" height="780" />
+          </figure>
+
           <h1 class="hero__title"><span class="kw">Rolfing® Structural Integration (SI)</span> May Have the Ability to Dramatically Alter a Person&rsquo;s Posture and Structure.</h1>
           <p class="hero__subtitle"><span class="kw">Rolfing (SI)</span> is a holistic form of bodywork that realigns the whole body by releasing and reorganizing the connective tissues, called fascia. It potentially resolves discomfort, reduces compensations, and alleviates pain. Meet <span class="kw">Joyce</span>: </p>
 
@@ -202,10 +213,13 @@
 
         <p class="expect__outro reveal">Some people notice a shift after just one or two sessions. Others need a longer series to feel a lasting change. Joyce will walk you through what&rsquo;s realistic for your body during your first conversation — no inflated promises, just an honest read on your case.</p>
 
-        <figure class="hero__diagram-figure expect__diagram-mobile">
-          <img src="assets/img/posture-alignment-diagram.png"
-               alt="Diagram comparing a body unevenly supported by mismatched, tilted blocks to one aligned along a single straight vertical line — illustrating the postural realignment Rolfing works toward."
-               width="493" height="780" loading="lazy" />
+        <!-- Só no mobile: foto de antes/depois fechando a seção. Exibida inteira,
+             sem recorte (largura 100%, altura automática). -->
+        <figure class="expect__photo-mobile">
+          <img src="assets/img/gallery-1.jpg"
+               alt="A client&rsquo;s posture seen from behind, before Rolfing and after seven sessions."
+               width="1125" height="1125" loading="lazy" />
+          <figcaption>Client photo, shared with permission. Results vary from person to person.</figcaption>
         </figure>
       </div>
     </section>

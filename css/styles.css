@@ -631,17 +631,20 @@ body.nav-open { overflow: hidden; }
   .trustline li:not(:first-child)::before { display: none; }
 }
 
-/* Diagrama de alinhamento postural — pequeno, ancorado no topo da coluna
-   direita, acima da foto da Joyce. */
+/* Diagrama de alinhamento postural — complemento discreto do H1: encostado
+   no topo da coluna direita e alinhado à esquerda dela, para ficar o mais
+   próximo possível do título, sem competir com ele. */
 .hero__diagram {
   grid-area: diagram;
   display: flex;
-  justify-content: flex-end;
-  align-self: end;
+  justify-content: flex-start;
+  align-self: start;
 }
 .hero__diagram-figure {
-  width: 60%;
-  padding: var(--space-sm);
+  width: 100%;
+  max-width: 168px;
+  margin: 0;
+  padding: 10px;
   background: var(--color-canvas-raised);
   border-radius: var(--radius-md);
   box-shadow: 0 16px 40px -26px rgba(var(--color-hairless-shadow), 0.45);
@@ -672,6 +675,9 @@ body.nav-open { overflow: hidden; }
    imagem duas vezes. Escondida por padrão fora do mobile. */
 .hero__intro-photo { display: none; }
 
+/* Cópia reduzida do diagrama que acompanha o H1 — existe só no mobile. */
+.hero__title-diagram { display: none; }
+
 @media (max-width: 860px) {
   .hero__grid {
     grid-template-columns: 1fr;
@@ -684,11 +690,30 @@ body.nav-open { overflow: hidden; }
   .hero__media,
   .hero__diagram { display: none; }
 
+  /* O diagrama flutua à direita e o título contorna a figura — complemento
+     do H1, não um bloco concorrendo com ele. Como só as primeiras linhas do
+     título estreitam, o texto continua confortável de ler. */
+  .hero__title-diagram {
+    display: block;
+    float: right;
+    width: clamp(80px, 25vw, 118px);
+    max-width: none;
+    padding: 8px;
+    /* Calha proporcional: em telas muito estreitas cada pixel devolvido ao
+       título conta, então ela encolhe junto com a viewport. */
+    margin: 4px 0 var(--space-sm) clamp(14px, 4vw, 24px);
+    border-radius: var(--radius-sm);
+  }
+
   .hero__intro-photo {
     display: block;
     margin: var(--space-md) 0 var(--space-lg);
   }
   .hero__figure { aspect-ratio: 4 / 3; max-height: 46vh; }
+
+  /* clear garante que o subtítulo comece abaixo do diagrama mesmo em telas
+     largas o bastante para o H1 caber em poucas linhas. */
+  .hero__subtitle { clear: right; }
 
   .hero__subtitle, .microcopy { max-width: 48ch; }
   .quick-facts, .offer { max-width: none; }
@@ -805,20 +830,37 @@ body.nav-open { overflow: hidden; }
 
 .expect__outro { margin-top: var(--space-xl); max-width: var(--measure); }
 
-/* Cópia inline do diagrama postural — mesma ideia da foto da hero: some do
-   topo da hero no mobile e reaparece aqui, logo abaixo do parágrafo final
-   desta seção. Escondida por padrão fora do mobile. */
-.expect__diagram-mobile { display: none; }
+/* Foto de antes/depois que fecha esta seção — só no mobile, onde a hero é
+   uma coluna só e sobra espaço para ela respirar. Escondida no desktop, que
+   já mostra as mesmas fotos na galeria de depoimentos. */
+.expect__photo-mobile { display: none; }
 
 @media (max-width: 720px) {
   .steps { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 860px) {
-  .expect__diagram-mobile {
+  .expect__photo-mobile {
     display: block;
-    width: 60%;
-    margin: var(--space-lg) auto 0;
+    margin: var(--space-lg) 0 0;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--color-canvas-raised);
+    box-shadow: 0 16px 40px -30px rgba(var(--color-hairless-shadow), 0.4);
+  }
+  /* height:auto preserva a proporção original — a imagem aparece inteira,
+     sem nenhum recorte. */
+  .expect__photo-mobile img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .expect__photo-mobile figcaption {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--color-taupe);
+    padding: var(--space-sm) var(--space-md);
+    text-align: center;
   }
 }
 

@@ -251,10 +251,19 @@
     var deltaX = 0;
     var viewportWidth = viewport.clientWidth;
 
+    // A altura do viewport acompanha só o slide ativo (não a maior citação
+    // do grupo) — sem isso, o flex row estica todo mundo para a altura do
+    // maior card e depoimentos curtos ficam com um vazio enorme embaixo.
+    function updateHeight() {
+      var active = slides[index];
+      if (active) viewport.style.height = active.getBoundingClientRect().height + "px";
+    }
+
     function render(withTransition) {
       track.classList.toggle("is-dragging", !withTransition);
       var offset = -index * viewportWidth + (dragging ? deltaX : 0);
       track.style.transform = "translate3d(" + offset + "px, 0, 0)";
+      updateHeight();
 
       if (prevBtn) prevBtn.disabled = index === 0;
       if (nextBtn) nextBtn.disabled = index === slides.length - 1;
@@ -288,6 +297,11 @@
       viewportWidth = viewport.clientWidth;
       render(true);
     });
+
+    // As citações usam a fonte web (Fraunces/Karla); se ela ainda não tinha
+    // carregado no render inicial, a altura medida com a fonte de fallback
+    // fica errada. Uma medição extra depois do load corrige isso.
+    window.addEventListener("load", updateHeight);
 
     // Arrasto / swipe — Pointer Events cobrem mouse e toque com a mesma lógica.
     function onPointerDown(e) {

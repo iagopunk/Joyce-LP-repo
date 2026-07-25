@@ -956,6 +956,8 @@ body.nav-open { overflow: hidden; }
   margin: 0; font-size: 16px; line-height: 1.65; color: var(--color-ink);
   position: relative;
 }
+.quote blockquote p { margin: 0; }
+.quote blockquote p + p { margin-top: var(--space-sm); }
 .quote cite {
   display: block; margin-top: var(--space-md);
   font-style: normal; font-weight: 600; font-size: 14px;

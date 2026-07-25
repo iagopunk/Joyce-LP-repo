@@ -342,3 +342,87 @@
     render(false);
   });
 })();
+
+/* Formulário de contato — envio por fetch para o Web3Forms, sem sair da página.
+   Progressive enhancement: se o navegador não tiver fetch, deixamos o submit
+   nativo acontecer (o Web3Forms responde com a página de agradecimento dele),
+   e a validação dos campos continua sendo a nativa do HTML nos dois caminhos. */
+(function () {
+  "use strict";
+
+  var form = document.getElementById("contactForm");
+  if (!form) return;
+
+  var button = form.querySelector("[data-submit]");
+  var buttonLabel = form.querySelector("[data-submit-label]");
+  var status = form.querySelector("[data-form-status]");
+  var idleLabel = buttonLabel ? buttonLabel.textContent : "Send message";
+  var sending = false;
+
+  var GENERIC_ERROR =
+    "We couldn’t send your message. Please check your connection and try again.";
+
+  function showStatus(message, kind) {
+    if (!status) return;
+    status.textContent = message;
+    status.className = "contact-form__status is-" + kind;
+    status.hidden = false;
+  }
+
+  function setSending(on) {
+    sending = on;
+    if (button) button.disabled = on;
+    if (buttonLabel) buttonLabel.textContent = on ? "Sending…" : idleLabel;
+  }
+
+  // Só liga o estilo de campo inválido depois da primeira tentativa de envio.
+  form.addEventListener("invalid", function () {
+    form.classList.add("is-validated");
+  }, true);
+
+  form.addEventListener("submit", function (e) {
+    form.classList.add("is-validated");
+
+    if (!window.fetch || !window.FormData) return; // fallback: POST nativo
+    e.preventDefault();
+    if (sending) return;
+
+    setSending(true);
+    if (status) status.hidden = true;
+
+    fetch(form.action, {
+      method: "POST",
+      headers: { Accept: "application/json" },
+      body: new FormData(form)
+    })
+      .then(function (response) {
+        // Erros do Web3Forms vêm como JSON mesmo com status != 200, mas uma
+        // resposta inesperada (HTML de proxy, por ex.) não deve quebrar o .then.
+        return response.json().then(
+          function (data) { return { ok: response.ok, data: data }; },
+          function () { return { ok: false, data: null }; }
+        );
+      })
+      .then(function (result) {
+        if (result.ok && result.data && result.data.success) {
+          form.reset();
+          form.classList.remove("is-validated");
+          showStatus(
+            "Your message has been sent! We’ll be in touch shortly.",
+            "success"
+          );
+          return;
+        }
+        showStatus(
+          (result.data && result.data.message) || GENERIC_ERROR,
+          "error"
+        );
+      })
+      .catch(function () {
+        showStatus(GENERIC_ERROR, "error");
+      })
+      .then(function () {
+        setSending(false);
+      });
+  });
+})();

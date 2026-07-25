@@ -1229,6 +1229,148 @@ body.nav-open { overflow: hidden; }
 .finalcta .cta-block { margin-top: var(--space-xl); }
 
 /* =========================================================================
+   12.1 FORMULÁRIO DE CONTATO — cartão claro flutuando sobre o CTA final
+   ========================================================================= */
+.contact-card {
+  margin-top: var(--space-xl);
+  margin-inline: auto;
+  max-width: 560px;
+  text-align: left;
+  padding: clamp(24px, 5vw, 40px);
+  background: var(--color-canvas-raised);
+  color: var(--color-ink);
+  border-radius: var(--radius-md);
+  box-shadow: 0 30px 70px -32px rgba(0, 0, 0, 0.6);
+}
+
+.contact-card__head { margin-bottom: var(--space-lg); }
+.contact-card__title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  font-size: clamp(21px, 3.4vw, 26px);
+  line-height: 1.15;
+  color: var(--color-ink);
+}
+/* Os parágrafos do cartão precisam de dois níveis de classe para vencer a
+   regra `.finalcta p` (texto claro sobre fundo escuro) — aqui o fundo é claro. */
+.contact-card .contact-card__sub {
+  margin-top: var(--space-xs);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-taupe-deep);
+  max-width: none;
+  margin-inline: 0;
+}
+
+/* Campos ------------------------------------------------------------------ */
+.field + .field { margin-top: var(--space-md); }
+
+.field__label {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-taupe);
+  margin-bottom: var(--space-xs);
+}
+
+.field__input {
+  display: block;
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 16px; /* 16px evita o zoom automático do iOS ao focar o campo */
+  line-height: 1.5;
+  color: var(--color-ink);
+  background: #fff;
+  border: 1px solid rgba(140, 122, 102, 0.42);
+  border-radius: var(--radius-sm);
+  padding: 13px 15px;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.field__input::placeholder { color: var(--color-taupe); opacity: 0.75; }
+.field__input:hover { border-color: rgba(140, 122, 102, 0.65); }
+.field__input:focus {
+  outline: none;
+  border-color: var(--olive-deep);
+  box-shadow: 0 0 0 3px rgba(138, 143, 105, 0.28);
+}
+.field__input--area { resize: vertical; min-height: 130px; }
+
+/* Só marca o campo em vermelho depois que o usuário tentou enviar — assim
+   nada fica "errado" enquanto ele ainda está digitando pela primeira vez. */
+.contact-form.is-validated .field__input:invalid {
+  border-color: #B4503C;
+}
+.contact-form.is-validated .field__input:invalid:focus {
+  box-shadow: 0 0 0 3px rgba(180, 80, 60, 0.22);
+}
+
+.contact-card .field__hint {
+  margin-top: 6px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--color-taupe-deep);
+  max-width: none;
+  margin-inline: 0;
+}
+
+/* Honeypot — fora da tela e fora da ordem de tabulação, nunca display:none
+   (alguns bots ignoram campos ocultos assim). */
+.contact-form__hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Botão + feedback ------------------------------------------------------- */
+.contact-form__submit {
+  margin-top: var(--space-lg);
+  width: 100%;
+  justify-content: center;
+}
+.contact-form__submit[disabled] {
+  opacity: 0.72;
+  cursor: progress;
+  transform: none;
+}
+.contact-form__submit[disabled]:hover {
+  background: var(--olive);
+  transform: none;
+}
+
+.contact-card .contact-form__status {
+  margin-top: var(--space-md);
+  font-size: 15px;
+  line-height: 1.55;
+  max-width: none;
+  margin-inline: 0;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+}
+.contact-card .contact-form__status.is-success {
+  color: var(--olive-deep);
+  background: rgba(138, 143, 105, 0.12);
+  border-color: rgba(138, 143, 105, 0.4);
+}
+.contact-card .contact-form__status.is-error {
+  color: #8E3E2C;
+  background: rgba(180, 80, 60, 0.10);
+  border-color: rgba(180, 80, 60, 0.38);
+}
+
+@media (max-width: 560px) {
+  .contact-card { border-radius: var(--radius-sm); }
+}
+
+/* =========================================================================
    Footer
    ========================================================================= */
 .site-footer {

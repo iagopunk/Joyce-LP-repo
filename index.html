@@ -110,12 +110,12 @@
           </div>
 
           <div class="hero__cta-row">
-            <a class="btn" href="https://wa.me/14374230919?text=Hi%20Joyce%21%20I%20just%20came%20across%20your%20Rolfing%20page%20and%20I%27d%20like%20to%20find%20out%20if%20this%20could%20help%20with%20some%20tension%20I%27ve%20been%20dealing%20with.%20Do%20you%20have%20a%20few%20minutes%20to%20chat%3F" target="_blank" rel="noopener">
-              Message Joyce on WhatsApp
+            <a class="btn" href="#contact">
+              Send Joyce a message
               <span class="btn__arrow" aria-hidden="true">→</span>
             </a>
           </div>
-          <p class="microcopy">Message Joyce directly to check availability and ask any questions.</p>
+          <p class="microcopy">Write to Joyce directly to check availability and ask any questions — she reads and answers every message herself.</p>
         </div>
 
         <div class="hero__diagram">
@@ -415,8 +415,8 @@
         </div>
 
         <div class="cta-block reveal">
-          <a class="btn" href="https://wa.me/14374230919?text=Hi%20Joyce%21%20I%20just%20came%20across%20your%20Rolfing%20page%20and%20I%27d%20like%20to%20find%20out%20if%20this%20could%20help%20with%20some%20tension%20I%27ve%20been%20dealing%20with.%20Do%20you%20have%20a%20few%20minutes%20to%20chat%3F" target="_blank" rel="noopener">
-            Message Joyce on WhatsApp <span class="btn__arrow" aria-hidden="true">→</span>
+          <a class="btn" href="#contact">
+            Send Joyce a message <span class="btn__arrow" aria-hidden="true">→</span>
           </a>
         </div>
       </div>
@@ -443,8 +443,8 @@
         <p class="benefits-outro reveal">None of this happens overnight, and Rolfing isn&rsquo;t a guarantee. But it&rsquo;s built around exactly this kind of change: not just less pain in the moment, but a body that holds itself differently over time.</p>
 
         <div class="cta-block reveal">
-          <a class="btn" href="https://wa.me/14374230919?text=Hi%20Joyce%21%20I%20just%20came%20across%20your%20Rolfing%20page%20and%20I%27d%20like%20to%20find%20out%20if%20this%20could%20help%20with%20some%20tension%20I%27ve%20been%20dealing%20with.%20Do%20you%20have%20a%20few%20minutes%20to%20chat%3F" target="_blank" rel="noopener">
-            Message Joyce on WhatsApp <span class="btn__arrow" aria-hidden="true">→</span>
+          <a class="btn" href="#contact">
+            Send Joyce a message <span class="btn__arrow" aria-hidden="true">→</span>
           </a>
         </div>
       </div>
@@ -501,10 +501,62 @@
         <h2 id="final-title">Your Body Isn&rsquo;t Broken. It&rsquo;s Been Compensating for a Long Time.</h2>
         <p>You don&rsquo;t have to keep cycling through treatments that help for a week and fade by the next. A whole-body approach looks at the pattern underneath — not just the spot that hurts today.</p>
         <p>Joyce keeps a deliberately small caseload so she can give each person real attention — which also means it&rsquo;s worth reaching out sooner rather than later.</p>
-        <div class="cta-block">
-          <a class="btn btn--light" href="https://wa.me/14374230919?text=Hi%20Joyce%21%20I%20just%20came%20across%20your%20Rolfing%20page%20and%20I%27d%20like%20to%20find%20out%20if%20this%20could%20help%20with%20some%20tension%20I%27ve%20been%20dealing%20with.%20Do%20you%20have%20a%20few%20minutes%20to%20chat%3F" target="_blank" rel="noopener">
-            Message Joyce on WhatsApp <span class="btn__arrow" aria-hidden="true">→</span>
-          </a>
+
+        <!-- Formulário de contato — cartão claro sobre o fundo escuro do CTA final.
+             Envio via Web3Forms: o POST sai do navegador direto para a API deles,
+             que reencaminha a mensagem por e-mail. A access_key é pública por
+             design (fica amarrada ao e-mail de destino cadastrado); não existe
+             segredo exposto aqui e não é preciso backend próprio.
+             Sem JS o formulário ainda funciona: o POST nativo vai para a mesma
+             URL e o Web3Forms devolve a página de agradecimento dele. -->
+        <div class="contact-card">
+          <div class="contact-card__head">
+            <h3 class="contact-card__title">Send Joyce a message</h3>
+            <p class="contact-card__sub">Tell her what&rsquo;s going on with your body — she&rsquo;ll reply personally by email.</p>
+          </div>
+
+          <form class="contact-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="COLE_AQUI_A_ACCESS_KEY_DO_WEB3FORMS" />
+            <input type="hidden" name="subject" value="New message from your Rolfing website" />
+            <input type="hidden" name="from_name" value="Joy by Joyce — Website" />
+
+            <!-- Honeypot antispam do Web3Forms: humanos nunca veem nem tabulam
+                 até este campo; bots que preenchem tudo têm o envio descartado. -->
+            <label class="contact-form__hp" aria-hidden="true">
+              Do not fill this out
+              <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" />
+            </label>
+
+            <div class="field">
+              <label class="field__label" for="cf-name">Full name</label>
+              <input class="field__input" id="cf-name" name="name" type="text"
+                     autocomplete="name" maxlength="120" required
+                     placeholder="Your full name" />
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="cf-email">Email</label>
+              <input class="field__input" id="cf-email" name="email" type="email"
+                     autocomplete="email" maxlength="180" required
+                     placeholder="you@example.com"
+                     aria-describedby="cf-email-hint" />
+              <p class="field__hint" id="cf-email-hint">Joyce replies straight to this address.</p>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="cf-message">Message</label>
+              <textarea class="field__input field__input--area" id="cf-message" name="message"
+                        rows="5" maxlength="2000" required
+                        placeholder="What&rsquo;s been bothering you, how long it&rsquo;s been going on, and anything you&rsquo;d like to ask."></textarea>
+            </div>
+
+            <button class="btn contact-form__submit" type="submit" data-submit>
+              <span data-submit-label>Send message</span>
+              <span class="btn__arrow" aria-hidden="true">→</span>
+            </button>
+
+            <p class="contact-form__status" data-form-status role="status" aria-live="polite" hidden></p>
+          </form>
         </div>
       </div>
     </section>

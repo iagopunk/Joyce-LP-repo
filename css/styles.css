@@ -218,6 +218,9 @@ strong { font-weight: 600; }
 /* Palavra-chave destacada — olive-deep, peso reforçado */
 .kw { color: var(--olive-deep); font-weight: 600; }
 
+/* Palavra-chave destacada — amarelo dourado, peso reforçado */
+.kw-gold { color: #facb5a; font-weight: 600; }
+
 /* ---- Foco de teclado visível ------------------------------------------- */
 a:focus-visible,
 .btn:focus-visible,
@@ -511,15 +514,12 @@ body.nav-open { overflow: hidden; }
   z-index: 1;
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
-  grid-template-areas:
-    "content diagram"
-    "content photo";
+  grid-template-areas: "content diagram";
   gap: 22px clamp(32px, 6vw, 80px);
-  align-items: center;
+  align-items: start;
 }
 
 .hero__content { grid-area: content; max-width: 620px; }
-.hero__media { grid-area: photo; }
 
 .hero__title {
   font-size: clamp(34px, 6.2vw, 56px);
@@ -670,10 +670,39 @@ body.nav-open { overflow: hidden; }
   object-position: 50% 30%;
 }
 
-/* Cópia inline da foto da hero, usada só na versão mobile (ver media query
-   abaixo) — reaproveita o mesmo arquivo, então o navegador não baixa a
-   imagem duas vezes. Escondida por padrão fora do mobile. */
-.hero__intro-photo { display: none; }
+/* Foto orgânica sob o H1 — reaproveita a mesma linguagem de moldura/animação
+   da colagem "Inside a Session" (ver 6.5), aqui reduzida a uma peça só com
+   poucos ornamentos ao fundo. .frame/.frame__inner são as mesmas classes de
+   lá; as regras abaixo só desligam o posicionamento por --x/--y/--w (feito
+   para o arranjo de 4 peças) e preenchem o contêiner inteiro. */
+.hero-photo {
+  position: relative;
+  width: min(360px, 58%);
+  aspect-ratio: 3 / 2;
+  margin: var(--space-sm) 0 var(--space-lg);
+  isolation: isolate;
+}
+.hero-photo__frame { position: absolute; inset: 0; margin: 0; }
+.hero-photo__frame .frame__inner {
+  width: 100%;
+  height: 100%;
+  --ar: 3 / 2;
+  --morph: morph-b;
+  --morph-dur: 19s;
+}
+
+@media (max-width: 560px) {
+  .hero-photo { width: min(280px, 66%); }
+}
+
+/* Foto de Joyce usada na teaser "Meet Joyce" (ver 2.6, abaixo da quote da
+   Ida Rolf). No desktop aparece como cartão retrato contido; no mobile
+   ocupa a largura toda, sem cortes (ver override no media query abaixo). */
+.hero__intro-photo {
+  display: block;
+  width: min(420px, 100%);
+  margin: 0 auto var(--space-lg);
+}
 
 /* Cópia reduzida do diagrama que acompanha o H1 — existe só no mobile. */
 .hero__title-diagram { display: none; }
@@ -683,11 +712,8 @@ body.nav-open { overflow: hidden; }
     grid-template-columns: 1fr;
     grid-template-areas: "content";
   }
-  /* No mobile a foto principal e o diagrama saem do topo da hero — cada um
-     reaparece mais abaixo, junto do trecho de texto a que se referem
-     ("Meet Joyce:" e o parágrafo final de "What a Session Looks Like").
-     Os originais (.hero__media / .hero__diagram) ficam ocultos aqui. */
-  .hero__media,
+  /* No mobile o diagrama da coluna direita sai da hero — a cópia reduzida
+     em .hero__title-diagram (flutuando junto ao H1) assume o lugar dele. */
   .hero__diagram { display: none; }
 
   /* O diagrama flutua à direita e o título contorna a figura — complemento
@@ -706,10 +732,16 @@ body.nav-open { overflow: hidden; }
   }
 
   .hero__intro-photo {
-    display: block;
-    margin: var(--space-md) 0 var(--space-lg);
+    width: 100%;
+    margin: 0 0 var(--space-lg);
+    aspect-ratio: auto;
+    max-height: none;
   }
-  .hero__figure { aspect-ratio: 4 / 3; max-height: 46vh; }
+  .hero__intro-photo img {
+    width: 100%;
+    height: auto;
+    object-fit: unset;
+  }
 
   /* clear garante que o subtítulo comece abaixo do diagrama mesmo em telas
      largas o bastante para o H1 caber em poucas linhas. */
@@ -717,6 +749,88 @@ body.nav-open { overflow: hidden; }
 
   .hero__subtitle, .microcopy { max-width: 48ch; }
   .quick-facts, .offer { max-width: none; }
+}
+
+/* =========================================================================
+   1.5 WHAT IS ROLFING — explicador em coluna única, título centrado
+   ========================================================================= */
+.rolfing-explainer { max-width: 720px; margin-inline: auto; }
+.rolfing-explainer .section-title {
+  text-align: center;
+  max-width: 22ch;
+  margin-inline: auto;
+  margin-bottom: var(--space-lg);
+}
+.rolfing-explainer p + p { margin-top: var(--space-md); }
+
+/* =========================================================================
+   1.6 IDA ROLF QUOTE — moldura minimalista, traços orgânicos
+   ========================================================================= */
+.rolf-quote-section { padding-block: calc(var(--section-y) * 0.7); }
+.rolf-quote {
+  position: relative;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: var(--space-sm) clamp(12px, 4vw, 40px);
+  text-align: center;
+}
+.rolf-quote__flourish {
+  display: block;
+  width: clamp(96px, 18vw, 156px);
+  height: auto;
+  margin: 0 auto;
+}
+.rolf-quote__flourish path {
+  fill: none;
+  stroke: var(--olive);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  opacity: 0.55;
+}
+.rolf-quote__flourish--top { margin-bottom: var(--space-xs); }
+.rolf-quote__flourish--bottom { margin-top: var(--space-sm); }
+.rolf-quote__mark {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(56px, 9vw, 84px);
+  line-height: 0.6;
+  color: var(--olive-deep);
+  opacity: 0.4;
+}
+.rolf-quote__mark--open { margin-bottom: -0.15em; }
+.rolf-quote__mark--close { margin-top: 0.5em; }
+.rolf-quote__text {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-style: italic;
+  font-size: clamp(24px, 3.4vw, 33px);
+  line-height: 1.42;
+  color: var(--color-ink);
+}
+.rolf-quote__text p { margin: 0; }
+.rolf-quote__cite {
+  display: block;
+  margin-top: var(--space-md);
+  font-family: var(--font-body);
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-taupe-deep);
+}
+.rolf-quote__cite::before { content: "— "; }
+
+/* =========================================================================
+   1.7 MEET JOYCE TEASER — foto, credenciais, oferta e CTA (vieram da hero)
+   ========================================================================= */
+.meet-teaser { max-width: 720px; margin-inline: auto; }
+.meet-teaser__label {
+  margin: 0 0 var(--space-lg);
+  font-family: var(--font-display);
+  font-size: clamp(19px, 2.6vw, 22px);
+  font-style: italic;
 }
 
 /* =========================================================================
@@ -934,8 +1048,8 @@ body.nav-open { overflow: hidden; }
   --drift-dur: 13s;  --drift-delay: 1.2s;
 }
 .frame--b {
-  --x: 36%; --y: 46%; --w: 34%; --z: 2;
-  --ar: 3 / 2;       --pos: 58% 52%;
+  --x: 40%; --y: 40%; --w: 22%; --z: 2;
+  --ar: 1066 / 1600; --pos: 50% 42%;
   --morph: morph-b;  --morph-dur: 19s;
   --drift-dur: 15s;  --drift-delay: 2.1s;
 }
@@ -993,7 +1107,7 @@ body.nav-open { overflow: hidden; }
   .collage { aspect-ratio: 10 / 15; margin-top: clamp(36px, 9vw, 56px); }
 
   .frame--a { --x: 0%;  --y: 2%;  --w: 68%; }
-  .frame--b { --x: 2%;  --y: 40%; --w: 56%; }
+  .frame--b { --x: 2%;  --y: 40%; --w: 40%; }
   .frame--c { --x: 55%; --y: 30%; --w: 40%; }
   .frame--d { --x: 30%; --y: 74%; --w: 56%; }
 

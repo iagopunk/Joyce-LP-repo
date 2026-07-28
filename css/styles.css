@@ -7,25 +7,25 @@
 
 /* ---- Tokens ------------------------------------------------------------- */
 :root {
-  /* Cor — paleta de 6 tons nomeados */
-  --color-canvas:     #F2ECE1;  /* fundo principal — areia quente */
-  --color-mist:       #E7DFD0;  /* fundo secundário — alterna com canvas */
-  --color-ink:        #2C2820;  /* texto principal — quase-preto quente */
+  /* Cor — paleta "Warm Luxury" */
+  --color-canvas:     #FDFBF7;  /* fundo principal — creme suave */
+  --color-mist:       #E8DFD8;  /* fundo secundário / bordas & cards — sand */
+  --color-ink:        #2D1C13;  /* texto principal — espresso profundo */
   --color-taupe:      #8C7A66;  /* ícones, bordas, texto secundário/labels */
   --color-taupe-deep: #5E5142;  /* hover/active de elementos em taupe */
-  --color-ember:      #A8663D;  /* ÚNICO acento quente — só no elemento-assinatura */
-  --olive:            #8A8F69;  /* fundo dos botões CTA (pedido do cliente) */
-  --olive-deep:       #6E7350;  /* hover de botão + palavras-chave destacadas */
+  --sage:             #8A9A86;  /* acento natural opcional — ícones/detalhes orgânicos */
+  --gold:             #D4AF37;  /* dourado radiante — botões & destaques (fills) */
+  --gold-deep:        #B8912E;  /* dourado escuro — hover de botão / decorativo */
+  --gold-text:        #8A6D1E;  /* bronze escuro — dourado usado como cor de TEXTO (contraste) */
 
-  /* Header — olive da paleta + dourado da logo (Joy by Joyce) */
-  --header-bg:        var(--olive-deep);
-  --header-bg-glass:  rgba(110, 115, 80, 0.72); /* rgb de --olive-deep */
-  --header-fg:        #FFFFFF;
-  --gold:             #E3B62B;  /* acento do menu — mesmo dourado da logo */
+  /* Header — sand claro (contraste com a parte escura da logo) + dourado */
+  --header-bg:        var(--color-mist);
+  --header-bg-glass:  rgba(232, 223, 216, 0.82); /* rgb de --color-mist */
+  --header-fg:        var(--color-ink);
 
   /* Tons auxiliares derivados (mesma família, para superfícies de card) */
-  --color-canvas-raised: #F7F2EA; /* card claro sobre mist */
-  --color-hairless-shadow: 44 40 32; /* rgb do ink para sombras suaves */
+  --color-canvas-raised: #FFFFFF; /* card claro sobre mist */
+  --color-hairless-shadow: 45 28 19; /* rgb do ink para sombras suaves */
 
   /* Tipografia */
   --font-display: "Fraunces", Georgia, "Times New Roman", serif;
@@ -54,13 +54,13 @@
 
   /* Header fixo — alto o bastante para a logo "Joy by Joyce" caber legível,
      incluindo a linha "Healthier Choices" na base da arte. */
-  --header-h: 86px;
+  --header-h: 106px;
 }
 @media (max-width: 900px) {
-  :root { --header-h: 78px; }
+  :root { --header-h: 95px; }
 }
 @media (max-width: 560px) {
-  :root { --header-h: 68px; }
+  :root { --header-h: 83px; }
 }
 
 /* Mobile-first: reduz respiração (~45%) abaixo de 768px */
@@ -170,8 +170,8 @@ strong { font-weight: 600; }
 
 /* ---- Botão / CTA -------------------------------------------------------- */
 .btn {
-  --btn-bg: var(--olive);
-  --btn-fg: #ffffff;
+  --btn-bg: var(--gold);
+  --btn-fg: var(--color-ink);
   display: inline-flex;
   align-items: center;
   gap: 0.6em;
@@ -195,7 +195,7 @@ strong { font-weight: 600; }
   will-change: transform;
 }
 .btn:hover {
-  background: var(--olive-deep);
+  background: var(--gold-deep);
   transform: translateY(-2px);
   box-shadow: 0 2px 4px rgba(var(--color-hairless-shadow), 0.12),
               0 18px 42px -14px rgba(var(--color-hairless-shadow), 0.45);
@@ -207,19 +207,19 @@ strong { font-weight: 600; }
 }
 .btn:hover .btn__arrow { transform: translateX(4px); }
 
-/* Todos os botões CTA em olive (pedido do cliente) — inclusive sobre o
-   fundo escuro do CTA final. Texto branco para o melhor contraste possível. */
+/* Todos os botões CTA em dourado — inclusive sobre o fundo escuro do CTA
+   final. Texto espresso para o melhor contraste possível sobre o dourado. */
 .btn--light {
-  --btn-bg: var(--olive);
-  --btn-fg: #ffffff;
+  --btn-bg: var(--gold);
+  --btn-fg: var(--color-ink);
 }
-.btn--light:hover { --btn-bg: var(--olive-deep); background: var(--olive-deep); }
+.btn--light:hover { --btn-bg: var(--gold-deep); background: var(--gold-deep); }
 
-/* Palavra-chave destacada — olive-deep, peso reforçado */
-.kw { color: var(--olive-deep); font-weight: 600; }
+/* Palavra-chave destacada — bronze escuro (dourado com contraste de texto) */
+.kw { color: var(--gold-text); font-weight: 600; }
 
 /* Palavra-chave destacada — amarelo dourado, peso reforçado */
-.kw-gold { color: #facb5a; font-weight: 600; }
+.kw-gold { color: var(--gold); font-weight: 600; }
 
 /* ---- Foco de teclado visível ------------------------------------------- */
 a:focus-visible,
@@ -227,7 +227,7 @@ a:focus-visible,
 summary:focus-visible,
 .carousel-arrow:focus-visible,
 .testimonial-carousel__dot:focus-visible {
-  outline: 3px solid var(--color-ember);
+  outline: 3px solid var(--gold);
   outline-offset: 3px;
   border-radius: var(--radius-sm);
 }
@@ -248,7 +248,7 @@ summary:focus-visible,
 .skip-link:focus { left: 16px; top: 16px; }
 
 /* =========================================================================
-   SITE HEADER — vitrine fixa (sticky) em olive, efeito de vidro ao rolar.
+   SITE HEADER — vitrine fixa (sticky) em sand claro, efeito de vidro ao rolar.
    Logo à esquerda, menu de seções à direita (inline no desktop, painel
    sanfonado atrás do botão hambúrguer no mobile).
    ========================================================================= */
@@ -270,17 +270,17 @@ summary:focus-visible,
   min-height: var(--header-h);
 }
 
-/* Estado rolado — vidro translúcido com blur, mesma família de cor do olive */
+/* Estado rolado — vidro translúcido com blur, mesma família de cor do header (sand) */
 .site-header.is-scrolled {
   background: var(--header-bg-glass);
   -webkit-backdrop-filter: blur(20px) saturate(160%);
   backdrop-filter: blur(20px) saturate(160%);
-  border-bottom-color: rgba(255, 255, 255, 0.16);
+  border-bottom-color: rgba(45, 28, 19, 0.14);
   box-shadow: 0 6px 26px rgba(var(--color-hairless-shadow), 0.18);
 }
 /* Fallback sem suporte a backdrop-filter: fundo mais opaco, sem blur */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .site-header.is-scrolled { background: rgba(110, 115, 80, 0.96); }
+  .site-header.is-scrolled { background: rgba(232, 223, 216, 0.96); }
 }
 
 /* Logo — PNG com fundo transparente, exibida inteira (sem recorte).
@@ -292,12 +292,12 @@ summary:focus-visible,
   flex: none;
 }
 .brand-logo {
-  height: 66px;
+  height: 86px;
   width: auto;
   flex: none;
 }
-@media (max-width: 900px) { .brand-logo { height: 58px; } }
-@media (max-width: 560px) { .brand-logo { height: 50px; } }
+@media (max-width: 900px) { .brand-logo { height: 75px; } }
+@media (max-width: 560px) { .brand-logo { height: 65px; } }
 
 /* ---- Menu de seções ----------------------------------------------------- */
 .site-nav__list {
@@ -332,17 +332,17 @@ summary:focus-visible,
   bottom: 2px;
   height: 2px;
   border-radius: 2px;
-  background: var(--gold);
+  background: var(--gold-text);
   transform: scaleX(0);
   transform-origin: center;
   transition: transform 220ms ease;
 }
 .site-nav__link:hover,
-.site-nav__link:focus-visible { color: var(--gold); }
+.site-nav__link:focus-visible { color: var(--gold-text); }
 .site-nav__link:hover::after,
 .site-nav__link:focus-visible::after,
 .site-nav__link.is-active::after { transform: scaleX(1); }
-.site-nav__link.is-active { color: var(--gold); }
+.site-nav__link.is-active { color: var(--gold-text); }
 
 @media (max-width: 1060px) {
   .site-nav__link { font-size: 13.5px; padding: 8px 8px; }
@@ -358,15 +358,15 @@ summary:focus-visible,
   height: 44px;
   margin: 0;
   padding: 0;
-  border: 1px solid rgba(255, 255, 255, 0.28);
+  border: 1px solid rgba(45, 28, 19, 0.22);
   border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(45, 28, 19, 0.06);
   color: var(--header-fg);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   transition: background-color 200ms ease, border-color 200ms ease;
 }
-.nav-toggle:hover { background: rgba(255, 255, 255, 0.16); }
+.nav-toggle:hover { background: rgba(45, 28, 19, 0.12); }
 .nav-toggle__bars {
   position: relative;
   display: block;
@@ -399,7 +399,7 @@ summary:focus-visible,
   position: fixed;
   inset: 0;
   z-index: 90;
-  background: rgba(44, 40, 32, 0.42);
+  background: rgba(45, 28, 19, 0.42);
   opacity: 0;
   transition: opacity 260ms ease;
 }
@@ -418,7 +418,7 @@ summary:focus-visible,
     background: var(--header-bg-glass);
     -webkit-backdrop-filter: blur(20px) saturate(160%);
     backdrop-filter: blur(20px) saturate(160%);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+    border-bottom: 1px solid rgba(45, 28, 19, 0.14);
     box-shadow: 0 14px 34px rgba(var(--color-hairless-shadow), 0.22);
     /* Fechado: recolhido e inerte */
     max-height: 0;
@@ -428,7 +428,7 @@ summary:focus-visible,
     transition: max-height 320ms ease, opacity 220ms ease, visibility 0s linear 320ms;
   }
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-    .site-nav { background: rgba(110, 115, 80, 0.98); }
+    .site-nav { background: rgba(232, 223, 216, 0.98); }
   }
 
   .site-nav.is-open {
@@ -445,7 +445,7 @@ summary:focus-visible,
     gap: 0;
     padding: var(--space-xs) clamp(20px, 5vw, 48px) var(--space-md);
   }
-  .site-nav__list li + li { border-top: 1px solid rgba(255, 255, 255, 0.14); }
+  .site-nav__list li + li { border-top: 1px solid rgba(45, 28, 19, 0.12); }
 
   .site-nav__link {
     padding: 15px 4px;
@@ -493,7 +493,7 @@ body.nav-open { overflow: hidden; }
   scroll-margin-top: var(--header-h);
 }
 
-/* Elemento-assinatura: glow radial âmbar (ocorrência 1 de 2) */
+/* Elemento-assinatura: glow radial dourado (ocorrência 1 de 2) */
 .hero__glow {
   position: absolute;
   top: -8%;
@@ -501,9 +501,9 @@ body.nav-open { overflow: hidden; }
   width: min(760px, 80vw);
   height: min(760px, 80vw);
   background: radial-gradient(circle at center,
-              rgba(168, 102, 61, 0.20) 0%,
-              rgba(168, 102, 61, 0.10) 34%,
-              rgba(168, 102, 61, 0) 68%);
+              rgba(212, 175, 55, 0.20) 0%,
+              rgba(212, 175, 55, 0.10) 34%,
+              rgba(212, 175, 55, 0) 68%);
   filter: blur(8px);
   pointer-events: none;
   z-index: 0;
@@ -573,7 +573,7 @@ body.nav-open { overflow: hidden; }
   font-size: 12px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--olive-deep);
+  color: var(--gold-text);
   margin: 0 0 var(--space-xs);
 }
 .offer__price {
@@ -782,7 +782,7 @@ body.nav-open { overflow: hidden; }
 }
 .rolf-quote__flourish path {
   fill: none;
-  stroke: var(--olive);
+  stroke: var(--gold);
   stroke-width: 1.6;
   stroke-linecap: round;
   opacity: 0.55;
@@ -794,7 +794,7 @@ body.nav-open { overflow: hidden; }
   font-family: var(--font-display);
   font-size: clamp(56px, 9vw, 84px);
   line-height: 0.6;
-  color: var(--olive-deep);
+  color: var(--gold-deep);
   opacity: 0.4;
 }
 .rolf-quote__mark--open { margin-bottom: -0.15em; }
@@ -932,9 +932,9 @@ body.nav-open { overflow: hidden; }
   width: 92%;
   height: 86%;
   background: radial-gradient(ellipse at center,
-              rgba(168, 102, 61, 0.20) 0%,
-              rgba(168, 102, 61, 0.09) 38%,
-              rgba(168, 102, 61, 0) 70%);
+              rgba(212, 175, 55, 0.20) 0%,
+              rgba(212, 175, 55, 0.09) 38%,
+              rgba(212, 175, 55, 0) 70%);
   filter: blur(12px);
   pointer-events: none;
 }
@@ -990,9 +990,9 @@ body.nav-open { overflow: hidden; }
   position: absolute;
   inset: 0;
   background: linear-gradient(160deg,
-              rgba(242, 236, 225, 0.14) 0%,
-              rgba(168, 102, 61, 0.07) 55%,
-              rgba(44, 40, 32, 0.10) 100%);
+              rgba(253, 251, 247, 0.14) 0%,
+              rgba(212, 175, 55, 0.07) 55%,
+              rgba(45, 28, 19, 0.10) 100%);
   pointer-events: none;
 }
 
@@ -1087,17 +1087,17 @@ body.nav-open { overflow: hidden; }
 }
 .collage__squiggle path {
   fill: none;
-  stroke: var(--olive);
+  stroke: var(--gold);
   stroke-width: 1.6;
   stroke-linecap: round;
   opacity: 0.55;
 }
 
 .collage__dot { border-radius: 50%; }
-.collage__dot--1 { left: 51%; top: 12%; width: 11px; height: 11px; background: var(--color-ember); opacity: .8; }
-.collage__dot--2 { left: 56%; top: 20%; width: 6px;  height: 6px;  background: var(--olive);        opacity: .75; }
-.collage__dot--3 { left: 3%;  top: 92%; width: 14px; height: 14px; background: var(--olive);        opacity: .5; }
-.collage__dot--4 { left: 42%; top: 92%; width: 7px;  height: 7px;  background: var(--color-ember);  opacity: .7; }
+.collage__dot--1 { left: 51%; top: 12%; width: 11px; height: 11px; background: var(--sage);        opacity: .8; }
+.collage__dot--2 { left: 56%; top: 20%; width: 6px;  height: 6px;  background: var(--gold);        opacity: .75; }
+.collage__dot--3 { left: 3%;  top: 92%; width: 14px; height: 14px; background: var(--gold);        opacity: .5; }
+.collage__dot--4 { left: 42%; top: 92%; width: 7px;  height: 7px;  background: var(--sage);  opacity: .7; }
 .collage__dot--5 { left: 91%; top: 91%; width: 9px;  height: 9px;  background: var(--color-taupe);  opacity: .55; }
 
 /* ---- Mobile: mesmo sistema, outra pauta ---------------------------------
@@ -1544,21 +1544,21 @@ body.nav-open { overflow: hidden; }
 }
 
 .price-card.is-recommended {
-  outline: 2px solid var(--olive);
+  outline: 2px solid var(--gold);
 }
 .badge {
   position: absolute;
   top: calc(-1 * var(--space-xs) - 6px);
   left: var(--space-lg);
-  background: var(--olive);
-  color: #ffffff;
+  background: var(--gold);
+  color: var(--color-ink);
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 6px 12px;
   border-radius: var(--radius-pill);
-  box-shadow: 0 8px 20px -8px rgba(138, 143, 105, 0.55);
+  box-shadow: 0 8px 20px -8px rgba(212, 175, 55, 0.55);
 }
 
 @media (max-width: 720px) {
@@ -1625,21 +1625,21 @@ body.nav-open { overflow: hidden; }
   width: min(900px, 120vw);
   height: min(700px, 80vw);
   background: radial-gradient(circle at center,
-              rgba(168, 102, 61, 0.55) 0%,
-              rgba(168, 102, 61, 0.22) 32%,
-              rgba(168, 102, 61, 0) 66%);
+              rgba(212, 175, 55, 0.55) 0%,
+              rgba(212, 175, 55, 0.22) 32%,
+              rgba(212, 175, 55, 0) 66%);
   filter: blur(10px);
   pointer-events: none;
   z-index: 0;
 }
 .finalcta .container { position: relative; z-index: 1; max-width: 760px; }
 .finalcta h2 {
-  color: #fff;
+  color: var(--color-canvas);
   font-size: clamp(27px, 4.6vw, 40px);
   margin-bottom: var(--space-lg);
 }
 .finalcta p {
-  color: rgba(242, 236, 225, 0.82);
+  color: rgba(253, 251, 247, 0.82);
   font-size: clamp(16px, 2.3vw, 19px);
   max-width: 56ch;
   margin-inline: auto;
@@ -1715,8 +1715,8 @@ body.nav-open { overflow: hidden; }
 .field__input:hover { border-color: rgba(140, 122, 102, 0.65); }
 .field__input:focus {
   outline: none;
-  border-color: var(--olive-deep);
-  box-shadow: 0 0 0 3px rgba(138, 143, 105, 0.28);
+  border-color: var(--gold-deep);
+  box-shadow: 0 0 0 3px rgba(184, 145, 46, 0.28);
 }
 .field__input--area { resize: vertical; min-height: 130px; }
 
@@ -1760,7 +1760,7 @@ body.nav-open { overflow: hidden; }
   transform: none;
 }
 .contact-form__submit[disabled]:hover {
-  background: var(--olive);
+  background: var(--gold);
   transform: none;
 }
 
@@ -1775,9 +1775,9 @@ body.nav-open { overflow: hidden; }
   border: 1px solid transparent;
 }
 .contact-card .contact-form__status.is-success {
-  color: var(--olive-deep);
-  background: rgba(138, 143, 105, 0.12);
-  border-color: rgba(138, 143, 105, 0.4);
+  color: var(--gold-text);
+  background: rgba(138, 109, 30, 0.12);
+  border-color: rgba(138, 109, 30, 0.4);
 }
 .contact-card .contact-form__status.is-error {
   color: #8E3E2C;
@@ -1794,13 +1794,13 @@ body.nav-open { overflow: hidden; }
    ========================================================================= */
 .site-footer {
   background: var(--color-ink);
-  color: rgba(242, 236, 225, 0.6);
+  color: rgba(253, 251, 247, 0.6);
   padding-block: var(--space-lg);
   text-align: center;
   font-size: 13px;
   letter-spacing: 0.02em;
 }
-.site-footer strong { color: rgba(242, 236, 225, 0.85); font-weight: 600; }
+.site-footer strong { color: rgba(253, 251, 247, 0.85); font-weight: 600; }
 
 /* =========================================================================
    Reveal on scroll — respeitando prefers-reduced-motion

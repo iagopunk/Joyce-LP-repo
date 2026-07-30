@@ -7,25 +7,25 @@
 
 /* ---- Tokens ------------------------------------------------------------- */
 :root {
-  /* Cor — paleta "Warm Luxury" */
-  --color-canvas:     #FDFBF7;  /* fundo principal — creme suave */
-  --color-mist:       #E8DFD8;  /* fundo secundário / bordas & cards — sand */
-  --color-ink:        #2D1C13;  /* texto principal — espresso profundo */
+  /* Cor — paleta de 6 tons nomeados */
+  --color-canvas:     #F2ECE1;  /* fundo principal — areia quente */
+  --color-mist:       #E7DFD0;  /* fundo secundário — alterna com canvas */
+  --color-ink:        #2C2820;  /* texto principal — quase-preto quente */
   --color-taupe:      #8C7A66;  /* ícones, bordas, texto secundário/labels */
   --color-taupe-deep: #5E5142;  /* hover/active de elementos em taupe */
-  --sage:             #8A9A86;  /* acento natural opcional — ícones/detalhes orgânicos */
-  --gold:             #D4AF37;  /* dourado radiante — botões & destaques (fills) */
-  --gold-deep:        #B8912E;  /* dourado escuro — hover de botão / decorativo */
-  --gold-text:        #8A6D1E;  /* bronze escuro — dourado usado como cor de TEXTO (contraste) */
+  --color-ember:      #A8663D;  /* ÚNICO acento quente — só no elemento-assinatura */
+  --olive:            #8A8F69;  /* fundo dos botões CTA (pedido do cliente) */
+  --olive-deep:       #6E7350;  /* hover de botão + palavras-chave destacadas */
 
-  /* Header — sand claro (contraste com a parte escura da logo) + dourado */
-  --header-bg:        var(--color-mist);
-  --header-bg-glass:  rgba(232, 223, 216, 0.82); /* rgb de --color-mist */
-  --header-fg:        var(--color-ink);
+  /* Header — olive da paleta + dourado da logo (Joy by Joyce) */
+  --header-bg:        var(--olive-deep);
+  --header-bg-glass:  rgba(110, 115, 80, 0.72); /* rgb de --olive-deep */
+  --header-fg:        #FFFFFF;
+  --gold:             #E3B62B;  /* acento do menu — mesmo dourado da logo */
 
   /* Tons auxiliares derivados (mesma família, para superfícies de card) */
-  --color-canvas-raised: #FFFFFF; /* card claro sobre mist */
-  --color-hairless-shadow: 45 28 19; /* rgb do ink para sombras suaves */
+  --color-canvas-raised: #F7F2EA; /* card claro sobre mist */
+  --color-hairless-shadow: 44 40 32; /* rgb do ink para sombras suaves */
 
   /* Tipografia */
   --font-display: "Fraunces", Georgia, "Times New Roman", serif;
@@ -170,8 +170,8 @@ strong { font-weight: 600; }
 
 /* ---- Botão / CTA -------------------------------------------------------- */
 .btn {
-  --btn-bg: var(--gold);
-  --btn-fg: var(--color-ink);
+  --btn-bg: var(--olive);
+  --btn-fg: #ffffff;
   display: inline-flex;
   align-items: center;
   gap: 0.6em;
@@ -195,7 +195,7 @@ strong { font-weight: 600; }
   will-change: transform;
 }
 .btn:hover {
-  background: var(--gold-deep);
+  background: var(--olive-deep);
   transform: translateY(-2px);
   box-shadow: 0 2px 4px rgba(var(--color-hairless-shadow), 0.12),
               0 18px 42px -14px rgba(var(--color-hairless-shadow), 0.45);
@@ -207,19 +207,19 @@ strong { font-weight: 600; }
 }
 .btn:hover .btn__arrow { transform: translateX(4px); }
 
-/* Todos os botões CTA em dourado — inclusive sobre o fundo escuro do CTA
-   final. Texto espresso para o melhor contraste possível sobre o dourado. */
+/* Todos os botões CTA em olive (pedido do cliente) — inclusive sobre o
+   fundo escuro do CTA final. Texto branco para o melhor contraste possível. */
 .btn--light {
-  --btn-bg: var(--gold);
-  --btn-fg: var(--color-ink);
+  --btn-bg: var(--olive);
+  --btn-fg: #ffffff;
 }
-.btn--light:hover { --btn-bg: var(--gold-deep); background: var(--gold-deep); }
+.btn--light:hover { --btn-bg: var(--olive-deep); background: var(--olive-deep); }
 
-/* Palavra-chave destacada — bronze escuro (dourado com contraste de texto) */
-.kw { color: var(--gold-text); font-weight: 600; }
+/* Palavra-chave destacada — olive-deep, peso reforçado */
+.kw { color: var(--olive-deep); font-weight: 600; }
 
 /* Palavra-chave destacada — amarelo dourado, peso reforçado */
-.kw-gold { color: var(--gold); font-weight: 600; }
+.kw-gold { color: #facb5a; font-weight: 600; }
 
 /* ---- Foco de teclado visível ------------------------------------------- */
 a:focus-visible,
@@ -227,7 +227,7 @@ a:focus-visible,
 summary:focus-visible,
 .carousel-arrow:focus-visible,
 .testimonial-carousel__dot:focus-visible {
-  outline: 3px solid var(--gold);
+  outline: 3px solid var(--color-ember);
   outline-offset: 3px;
   border-radius: var(--radius-sm);
 }
@@ -248,7 +248,7 @@ summary:focus-visible,
 .skip-link:focus { left: 16px; top: 16px; }
 
 /* =========================================================================
-   SITE HEADER — vitrine fixa (sticky) em sand claro, efeito de vidro ao rolar.
+   SITE HEADER — vitrine fixa (sticky) em olive, efeito de vidro ao rolar.
    Logo à esquerda, menu de seções à direita (inline no desktop, painel
    sanfonado atrás do botão hambúrguer no mobile).
    ========================================================================= */
@@ -270,17 +270,17 @@ summary:focus-visible,
   min-height: var(--header-h);
 }
 
-/* Estado rolado — vidro translúcido com blur, mesma família de cor do header (sand) */
+/* Estado rolado — vidro translúcido com blur, mesma família de cor do olive */
 .site-header.is-scrolled {
   background: var(--header-bg-glass);
   -webkit-backdrop-filter: blur(20px) saturate(160%);
   backdrop-filter: blur(20px) saturate(160%);
-  border-bottom-color: rgba(45, 28, 19, 0.14);
+  border-bottom-color: rgba(255, 255, 255, 0.16);
   box-shadow: 0 6px 26px rgba(var(--color-hairless-shadow), 0.18);
 }
 /* Fallback sem suporte a backdrop-filter: fundo mais opaco, sem blur */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .site-header.is-scrolled { background: rgba(232, 223, 216, 0.96); }
+  .site-header.is-scrolled { background: rgba(110, 115, 80, 0.96); }
 }
 
 /* Logo — PNG com fundo transparente, exibida inteira (sem recorte).
@@ -298,6 +298,33 @@ summary:focus-visible,
 }
 @media (max-width: 900px) { .brand-logo { height: 75px; } }
 @media (max-width: 560px) { .brand-logo { height: 65px; } }
+
+/* Tagline "Healthier Choices" — só aparece quando o menu de seções sai da
+   barra (vira hambúrguer), preenchendo o vão que sobra entre a logo e o
+   botão nesse layout de 2 elementos (ver .header-inner, justify-content:
+   space-between). No desktop o próprio menu ocupa esse espaço. */
+.header-tagline {
+  display: none;
+  margin: 0;
+}
+@media (max-width: 900px) {
+  .header-tagline {
+    display: block;
+    flex: 1;
+    min-width: 0;
+    text-align: center;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: clamp(11px, 3vw, 14px);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--header-fg);
+    opacity: 0.8;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
 
 /* ---- Menu de seções ----------------------------------------------------- */
 .site-nav__list {
@@ -332,17 +359,17 @@ summary:focus-visible,
   bottom: 2px;
   height: 2px;
   border-radius: 2px;
-  background: var(--gold-text);
+  background: var(--gold);
   transform: scaleX(0);
   transform-origin: center;
   transition: transform 220ms ease;
 }
 .site-nav__link:hover,
-.site-nav__link:focus-visible { color: var(--gold-text); }
+.site-nav__link:focus-visible { color: var(--gold); }
 .site-nav__link:hover::after,
 .site-nav__link:focus-visible::after,
 .site-nav__link.is-active::after { transform: scaleX(1); }
-.site-nav__link.is-active { color: var(--gold-text); }
+.site-nav__link.is-active { color: var(--gold); }
 
 @media (max-width: 1060px) {
   .site-nav__link { font-size: 13.5px; padding: 8px 8px; }
@@ -358,15 +385,15 @@ summary:focus-visible,
   height: 44px;
   margin: 0;
   padding: 0;
-  border: 1px solid rgba(45, 28, 19, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: var(--radius-sm);
-  background: rgba(45, 28, 19, 0.06);
+  background: rgba(255, 255, 255, 0.08);
   color: var(--header-fg);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   transition: background-color 200ms ease, border-color 200ms ease;
 }
-.nav-toggle:hover { background: rgba(45, 28, 19, 0.12); }
+.nav-toggle:hover { background: rgba(255, 255, 255, 0.16); }
 .nav-toggle__bars {
   position: relative;
   display: block;
@@ -399,7 +426,7 @@ summary:focus-visible,
   position: fixed;
   inset: 0;
   z-index: 90;
-  background: rgba(45, 28, 19, 0.42);
+  background: rgba(44, 40, 32, 0.42);
   opacity: 0;
   transition: opacity 260ms ease;
 }
@@ -418,7 +445,7 @@ summary:focus-visible,
     background: var(--header-bg-glass);
     -webkit-backdrop-filter: blur(20px) saturate(160%);
     backdrop-filter: blur(20px) saturate(160%);
-    border-bottom: 1px solid rgba(45, 28, 19, 0.14);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
     box-shadow: 0 14px 34px rgba(var(--color-hairless-shadow), 0.22);
     /* Fechado: recolhido e inerte */
     max-height: 0;
@@ -428,7 +455,7 @@ summary:focus-visible,
     transition: max-height 320ms ease, opacity 220ms ease, visibility 0s linear 320ms;
   }
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-    .site-nav { background: rgba(232, 223, 216, 0.98); }
+    .site-nav { background: rgba(110, 115, 80, 0.98); }
   }
 
   .site-nav.is-open {
@@ -445,7 +472,7 @@ summary:focus-visible,
     gap: 0;
     padding: var(--space-xs) clamp(20px, 5vw, 48px) var(--space-md);
   }
-  .site-nav__list li + li { border-top: 1px solid rgba(45, 28, 19, 0.12); }
+  .site-nav__list li + li { border-top: 1px solid rgba(255, 255, 255, 0.14); }
 
   .site-nav__link {
     padding: 15px 4px;
@@ -493,7 +520,7 @@ body.nav-open { overflow: hidden; }
   scroll-margin-top: var(--header-h);
 }
 
-/* Elemento-assinatura: glow radial dourado (ocorrência 1 de 2) */
+/* Elemento-assinatura: glow radial âmbar (ocorrência 1 de 2) */
 .hero__glow {
   position: absolute;
   top: -8%;
@@ -501,9 +528,9 @@ body.nav-open { overflow: hidden; }
   width: min(760px, 80vw);
   height: min(760px, 80vw);
   background: radial-gradient(circle at center,
-              rgba(212, 175, 55, 0.20) 0%,
-              rgba(212, 175, 55, 0.10) 34%,
-              rgba(212, 175, 55, 0) 68%);
+              rgba(168, 102, 61, 0.20) 0%,
+              rgba(168, 102, 61, 0.10) 34%,
+              rgba(168, 102, 61, 0) 68%);
   filter: blur(8px);
   pointer-events: none;
   z-index: 0;
@@ -526,6 +553,20 @@ body.nav-open { overflow: hidden; }
   line-height: 1.06;
   margin-bottom: var(--space-md);
   letter-spacing: -0.02em;
+}
+
+/* "JOY" em degradê dourado metálico — reproduz o gradiente da logo (claro
+   e vivo no topo das letras, escurecendo para um bronze ao descer). */
+.hero__title-gold {
+  background: linear-gradient(180deg,
+              #F9E9B8 0%,
+              #E8C158 28%,
+              #D4A017 58%,
+              #9C7A1E 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: #9C7A1E; /* fallback se background-clip:text não for suportado */
+  -webkit-text-fill-color: transparent;
 }
 
 .hero__subtitle {
@@ -573,7 +614,7 @@ body.nav-open { overflow: hidden; }
   font-size: 12px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--gold-text);
+  color: var(--olive-deep);
   margin: 0 0 var(--space-xs);
 }
 .offer__price {
@@ -632,12 +673,12 @@ body.nav-open { overflow: hidden; }
 }
 
 /* Diagrama de alinhamento postural — complemento discreto do H1: encostado
-   no topo da coluna direita e alinhado à esquerda dela, para ficar o mais
-   próximo possível do título, sem competir com ele. */
+   no topo da coluna direita e centralizado nela, para o conjunto do hero
+   ficar balanceado no container (mesmo eixo de centro das demais seções). */
 .hero__diagram {
   grid-area: diagram;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-self: start;
 }
 .hero__diagram-figure {
@@ -670,29 +711,28 @@ body.nav-open { overflow: hidden; }
   object-position: 50% 30%;
 }
 
-/* Foto orgânica sob o H1 — reaproveita a mesma linguagem de moldura/animação
-   da colagem "Inside a Session" (ver 6.5), aqui reduzida a uma peça só com
-   poucos ornamentos ao fundo. .frame/.frame__inner são as mesmas classes de
-   lá; as regras abaixo só desligam o posicionamento por --x/--y/--w (feito
-   para o arranjo de 4 peças) e preenchem o contêiner inteiro. */
+/* Foto que fecha a hero, sob o H1 — cartão retangular simples, esticado à
+   largura toda da coluna. Levemente mais larga que a proporção nativa da
+   foto (1600×1066 ≈ 1.5) para cortar só uma fatia fina de baixo, mantendo
+   mão e braço da Joyce (região focal) inteiros. */
 .hero-photo {
   position: relative;
-  width: min(360px, 58%);
-  aspect-ratio: 3 / 2;
+  width: 100%;
   margin: var(--space-sm) 0 var(--space-lg);
-  isolation: isolate;
 }
-.hero-photo__frame { position: absolute; inset: 0; margin: 0; }
-.hero-photo__frame .frame__inner {
+.hero-photo__frame {
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  aspect-ratio: 1.7 / 1;
+  background: var(--color-mist);
+  box-shadow: 0 20px 44px -30px rgba(var(--color-hairless-shadow), 0.45);
+}
+.hero-photo__frame img {
   width: 100%;
   height: 100%;
-  --ar: 3 / 2;
-  --morph: morph-b;
-  --morph-dur: 19s;
-}
-
-@media (max-width: 560px) {
-  .hero-photo { width: min(280px, 66%); }
+  object-fit: cover;
+  object-position: 50% 38%;
 }
 
 /* Foto de Joyce usada na teaser "Meet Joyce" (ver 2.6, abaixo da quote da
@@ -782,7 +822,7 @@ body.nav-open { overflow: hidden; }
 }
 .rolf-quote__flourish path {
   fill: none;
-  stroke: var(--gold);
+  stroke: var(--olive);
   stroke-width: 1.6;
   stroke-linecap: round;
   opacity: 0.55;
@@ -794,7 +834,7 @@ body.nav-open { overflow: hidden; }
   font-family: var(--font-display);
   font-size: clamp(56px, 9vw, 84px);
   line-height: 0.6;
-  color: var(--gold-deep);
+  color: var(--olive-deep);
   opacity: 0.4;
 }
 .rolf-quote__mark--open { margin-bottom: -0.15em; }
@@ -903,236 +943,67 @@ body.nav-open { overflow: hidden; }
 }
 
 /* =========================================================================
-   6.5 INSIDE A SESSION — colagem orgânica de 4 fotos
-   Contêiner com aspect-ratio fixo + peças posicionadas em % — assim a
-   composição inteira escala junto e as sobreposições nunca se desfazem.
-   Cada peça carrega as próprias coordenadas em custom properties, então
-   o layout de mobile é só uma troca de três valores.
+   6.5 INSIDE A SESSION — galeria tradicional de 4 fotos
+   Cliente pediu para tirar as molduras orgânicas que se transformavam:
+   aqui é um grid simples de cartões retangulares, com a mesma linguagem
+   de raio/sombra usada no resto do site (.meet__figure, .hero__figure).
+   Duas colunas de larguras diferentes (retrato estreito + paisagem larga)
+   fazem cada foto manter seu enquadramento original quase sem corte.
    ========================================================================= */
-.collage-head .section-title { max-width: 20ch; margin-inline: auto; }
-.collage-head .lead { max-width: 52ch; margin-inline: auto; }
-
-.collage {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 10 / 8;
-  margin-top: clamp(44px, 7vw, 76px);
-  isolation: isolate;
+.session-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  grid-template-rows: repeat(2, clamp(240px, 30vw, 380px));
+  gap: clamp(14px, 2.2vw, 24px);
+  margin-top: clamp(36px, 6vw, 56px);
 }
 
-/* Brilho âmbar difuso atrás do conjunto — dá profundidade e amarra as
-   peças como se houvesse uma fonte de luz quente por trás. */
-.collage::before {
-  content: "";
-  position: absolute;
-  z-index: 0;
-  left: 50%;
-  top: 48%;
-  transform: translate(-50%, -50%);
-  width: 92%;
-  height: 86%;
-  background: radial-gradient(ellipse at center,
-              rgba(212, 175, 55, 0.20) 0%,
-              rgba(212, 175, 55, 0.09) 38%,
-              rgba(212, 175, 55, 0) 70%);
-  filter: blur(12px);
-  pointer-events: none;
-}
-
-.frame {
-  position: absolute;
-  /* <figure> vem com margin 1em 40px do navegador — em posicionamento
-     absoluto isso soma ao left/top e desmonta as sobreposições. */
+.session-gallery__item {
   margin: 0;
-  left: var(--x);
-  top: var(--y);
-  width: var(--w);
-  z-index: var(--z, 1);
-  animation: drift var(--drift-dur, 13s) ease-in-out var(--drift-delay, 2s) infinite;
-}
-
-/* Deriva quase imperceptível (±5px, ciclo longo). Sozinha ninguém nota;
-   somada ao morfar das bordas é o que faz o conjunto parecer respirar. */
-@keyframes drift {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-5px); }
-}
-
-/* A moldura em si: é ela que morfa, recorta a foto e recebe a sombra.
-   Separada de .frame porque lá o transform já está ocupado pela deriva —
-   aqui fica livre para o hover. */
-.frame__inner {
   position: relative;
   overflow: hidden;
-  aspect-ratio: var(--ar);
+  border-radius: var(--radius-md);
   background: var(--color-mist);
-  box-shadow:
-    0 2px 6px rgba(var(--color-hairless-shadow), 0.06),
-    0 26px 56px -26px rgba(var(--color-hairless-shadow), 0.42);
-  animation: var(--morph) var(--morph-dur, 22s) ease-in-out infinite;
-  transition: transform 620ms cubic-bezier(.22, 1, .36, 1),
-              opacity 480ms ease,
-              filter 480ms ease;
-  will-change: border-radius;
+  box-shadow: 0 20px 44px -30px rgba(var(--color-hairless-shadow), 0.45);
+  transition: transform 420ms cubic-bezier(.22, 1, .36, 1),
+              box-shadow 420ms ease;
 }
-
-.frame__inner img {
+.session-gallery__item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: var(--pos, 50% 50%);
 }
 
 /* Véu quente sobre cada foto — unifica temperaturas de luz bem diferentes
    (a foto ao ar livre é externa e esverdeada; as de sessão são internas). */
-.frame__inner::after {
+.session-gallery__item::after {
   content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(160deg,
-              rgba(253, 251, 247, 0.14) 0%,
-              rgba(212, 175, 55, 0.07) 55%,
-              rgba(45, 28, 19, 0.10) 100%);
+              rgba(242, 236, 225, 0.14) 0%,
+              rgba(168, 102, 61, 0.07) 55%,
+              rgba(44, 40, 32, 0.10) 100%);
   pointer-events: none;
 }
 
-/* Foco por contraste: ao passar o mouse em uma peça, as outras recuam. */
-.collage:hover .frame__inner {
-  opacity: 0.55;
-  filter: saturate(0.75);
+.session-gallery__item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 28px 60px -26px rgba(var(--color-hairless-shadow), 0.55);
 }
-.frame:hover .frame__inner {
-  opacity: 1;
-  filter: none;
-  transform: scale(1.035);
-  box-shadow:
-    0 3px 8px rgba(var(--color-hairless-shadow), 0.08),
-    0 38px 74px -28px rgba(var(--color-hairless-shadow), 0.5);
-}
+.session-gallery__item:hover img { transform: scale(1.045); }
+.session-gallery__item img { transition: transform 620ms cubic-bezier(.22, 1, .36, 1); }
 
-/* ---- Quatro assinaturas de morfagem ------------------------------------
-   Durações propositalmente sem divisor comum (19/21/23/26s): as peças
-   nunca voltam a coincidir, então o conjunto não pulsa em bloco.
-   Manter a maioria dos raios entre 32% e 46% deixa trechos de lado quase
-   retos; puxar um ou dois cantos para 58-62% cria a assimetria de pétala
-   (quatro cantos a 50% dariam uma elipse perfeita — lisa e sem caráter). */
-@keyframes morph-a {
-  0%, 100% { border-radius: 62% 38% 36% 48% / 50% 58% 34% 44%; }
-  34%      { border-radius: 44% 56% 52% 34% / 38% 42% 56% 52%; }
-  67%      { border-radius: 52% 44% 40% 60% / 58% 34% 48% 38%; }
-}
-@keyframes morph-b {
-  0%, 100% { border-radius: 58% 42% 32% 52% / 44% 54% 38% 48%; }
-  34%      { border-radius: 36% 60% 50% 38% / 56% 36% 52% 40%; }
-  67%      { border-radius: 48% 34% 58% 44% / 34% 50% 44% 56%; }
-}
-@keyframes morph-c {
-  0%, 100% { border-radius: 54% 46% 38% 60% / 30% 36% 62% 68%; }
-  34%      { border-radius: 42% 58% 52% 44% / 38% 28% 70% 60%; }
-  67%      { border-radius: 60% 40% 44% 52% / 26% 34% 64% 72%; }
-}
-@keyframes morph-d {
-  0%, 100% { border-radius: 40% 60% 54% 34% / 52% 38% 46% 56%; }
-  34%      { border-radius: 56% 36% 42% 58% / 36% 54% 58% 40%; }
-  67%      { border-radius: 34% 52% 60% 46% / 48% 44% 34% 52%; }
-}
-
-/* ---- Posições: desktop --------------------------------------------------
-   B é a peça-charneira: cruza o centro na horizontal e encosta ao mesmo
-   tempo em A (à esquerda) e em C (à direita), costurando as três numa massa
-   só. D fecha embaixo, tocando B e C — o percurso do olho é A → B → C → D. */
-.frame--a {
-  --x: 2%;  --y: 10%; --w: 42%; --z: 4;
-  --ar: 810 / 838;   --pos: 50% 36%;
-  --morph: morph-a;  --morph-dur: 23s;
-  --drift-dur: 13s;  --drift-delay: 1.2s;
-}
-.frame--b {
-  --x: 40%; --y: 40%; --w: 22%; --z: 2;
-  --ar: 1066 / 1600; --pos: 50% 42%;
-  --morph: morph-b;  --morph-dur: 19s;
-  --drift-dur: 15s;  --drift-delay: 2.1s;
-}
-.frame--c {
-  --x: 63%; --y: 2%;  --w: 32%; --z: 1;
-  --ar: 804 / 1600;  --pos: 50% 40%;
-  --morph: morph-c;  --morph-dur: 26s;
-  --drift-dur: 17s;  --drift-delay: 1.7s;
-}
-.frame--d {
-  --x: 48%; --y: 70%; --w: 32%; --z: 3;
-  --ar: 3 / 2;       --pos: 42% 45%;
-  --morph: morph-d;  --morph-dur: 21s;
-  --drift-dur: 14s;  --drift-delay: 2.6s;
-}
-
-/* ---- Ornamentos — preenchem o vazio inferior esquerdo e o intervalo
-   entre A e C no topo, para o arranjo não ficar com buracos. ---------- */
-.collage__ornament { position: absolute; pointer-events: none; z-index: 0; }
-
-/* Contorno vazado: repete a linguagem das molduras sem trazer mais foto. */
-.collage__ring {
-  left: 4%;
-  top: 70%;
-  width: 15%;
-  aspect-ratio: 1;
-  border: 1.5px solid rgba(140, 122, 102, 0.42);
-  animation: morph-b 24s ease-in-out infinite;
-}
-
-.collage__squiggle {
-  left: 12%;
-  top: 80%;
-  width: 28%;
-}
-.collage__squiggle path {
-  fill: none;
-  stroke: var(--gold);
-  stroke-width: 1.6;
-  stroke-linecap: round;
-  opacity: 0.55;
-}
-
-.collage__dot { border-radius: 50%; }
-.collage__dot--1 { left: 51%; top: 12%; width: 11px; height: 11px; background: var(--sage);        opacity: .8; }
-.collage__dot--2 { left: 56%; top: 20%; width: 6px;  height: 6px;  background: var(--gold);        opacity: .75; }
-.collage__dot--3 { left: 3%;  top: 92%; width: 14px; height: 14px; background: var(--gold);        opacity: .5; }
-.collage__dot--4 { left: 42%; top: 92%; width: 7px;  height: 7px;  background: var(--sage);  opacity: .7; }
-.collage__dot--5 { left: 91%; top: 91%; width: 9px;  height: 9px;  background: var(--color-taupe);  opacity: .55; }
-
-/* ---- Mobile: mesmo sistema, outra pauta ---------------------------------
-   A composição em leque não cabe num telão vertical, então o contêiner
-   fica alto e as peças descem em zigue-zague, ainda se tocando duas a duas. */
+/* ---- Mobile: empilha em coluna única, cada foto na proporção original --- */
 @media (max-width: 760px) {
-  .collage { aspect-ratio: 10 / 15; margin-top: clamp(36px, 9vw, 56px); }
-
-  .frame--a { --x: 0%;  --y: 2%;  --w: 68%; }
-  .frame--b { --x: 2%;  --y: 40%; --w: 40%; }
-  .frame--c { --x: 55%; --y: 30%; --w: 40%; }
-  .frame--d { --x: 30%; --y: 74%; --w: 56%; }
-
-  /* Sem cursor não existe hover: o realce por contraste sairia de cena de
-     qualquer jeito, mas o :hover "grudado" do toque deixaria as outras
-     peças apagadas. Melhor desligar. */
-  .collage:hover .frame__inner { opacity: 1; filter: none; }
-  .frame:hover .frame__inner { transform: none; }
-
-  /* Ornamentos vão para os dois vazios que sobram no empilhamento vertical:
-     o canto superior direito (acima de C) e a faixa esquerda abaixo de B. */
-  .collage__ring     { left: 72%; top: 2%;  width: 20%; }
-  .collage__squiggle { left: 1%;  top: 82%; width: 28%; }
-
-  .collage__dot--1 { left: 76%; top: 19%; }
-  .collage__dot--2 { left: 88%; top: 25%; }
-  .collage__dot--3 { left: 6%;  top: 93%; }
-  .collage__dot--4 { left: 19%; top: 97%; }
-  .collage__dot--5 { left: 8%;  top: 71%; }
-}
-
-@media (max-width: 400px) {
-  /* Abaixo de 400px o conjunto começa a se comprimir: aumenta o pé-direito
-     do contêiner para as peças voltarem a ter ar entre si. */
-  .collage { aspect-ratio: 10 / 16; }
+  .session-gallery {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    margin-top: clamp(28px, 8vw, 44px);
+  }
+  .session-gallery__item { aspect-ratio: 3 / 2; }
+  .session-gallery__item:nth-child(1),
+  .session-gallery__item:nth-child(3) { aspect-ratio: 3 / 4; }
 }
 
 /* =========================================================================
@@ -1241,7 +1112,6 @@ body.nav-open { overflow: hidden; }
 .proof__intro { max-width: var(--measure); }
 
 .featured {
-  margin-top: var(--space-2xl);
   display: grid;
   grid-template-columns: 0.95fr 1.05fr;
   gap: clamp(28px, 5vw, 56px);
@@ -1278,38 +1148,44 @@ body.nav-open { overflow: hidden; }
   color: var(--color-ink);
 }
 .featured cite {
-  display: block; margin-top: var(--space-md);
+  display: flex; align-items: center; flex-wrap: wrap; gap: 4px 8px;
+  margin-top: var(--space-md);
   font-family: var(--font-body); font-style: normal;
   font-weight: 600; font-size: 16px; color: var(--color-taupe-deep);
   letter-spacing: 0.02em;
 }
+.cite-stars { height: 22px; width: auto; display: block; }
+.featured blockquote p { margin: 0; }
+.featured blockquote p + p { margin-top: var(--space-sm); }
 
 @media (max-width: 780px) {
   .featured { grid-template-columns: 1fr; }
   .featured__media { order: -1; }
 }
 
-/* Depoimentos na íntegra (texto completo, sem edição). Cartão .quote é
-   reaproveitado dentro de cada slide do carrossel abaixo. */
-.quote {
-  background: var(--color-canvas);
-  border-radius: var(--radius-md);
-  padding: var(--space-lg);
-  box-shadow: 0 16px 36px -30px rgba(var(--color-hairless-shadow), 0.35);
-  height: 100%;
+/* Depoimento com foto pequena acima do texto (Doug) — mesmo cartão
+   .featured, mas empilhado em qualquer largura (não só no mobile) e com a
+   foto contida num tamanho comedido, sem cortar nada dela (sem object-fit,
+   width/height naturais escaladas por max-width). */
+.featured--stacked {
+  grid-template-columns: 1fr;
 }
-.section--canvas .quote { background: var(--color-mist); }
-.quote blockquote {
-  margin: 0; font-size: 16px; line-height: 1.65; color: var(--color-ink);
-  position: relative;
+.featured--stacked .featured__media {
+  display: flex;
+  justify-content: center;
 }
-.quote blockquote p { margin: 0; }
-.quote blockquote p + p { margin-top: var(--space-sm); }
-.quote cite {
-  display: block; margin-top: var(--space-md);
-  font-style: normal; font-weight: 600; font-size: 14px;
-  color: var(--color-taupe-deep); letter-spacing: 0.02em;
+.featured--stacked .featured__figure {
+  width: 100%;
+  max-width: 220px;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
 }
+
+/* Depoimentos sem foto (todos exceto o do Michael e o do Doug) — mesmo cartão .featured,
+   só que sem a coluna de mídia: uma coluna só, preenchendo a largura toda
+   do carrossel para o texto não ficar espremido e esticar na vertical. */
+.featured--text-only { grid-template-columns: 1fr; }
 
 /* Carrossel de depoimentos — 1 slide visível por vez; navegação por seta
    (clique) ou arrasto/swipe (toque). Sem JS, os slides ficam empilhados
@@ -1361,7 +1237,6 @@ body.nav-open { overflow: hidden; }
   min-width: 0;
   padding-block: 2px;
 }
-.testimonial-carousel__track.is-dragging .quote,
 .testimonial-carousel__track.is-dragging blockquote { cursor: grabbing; }
 
 .carousel-arrow {
@@ -1544,21 +1419,21 @@ body.nav-open { overflow: hidden; }
 }
 
 .price-card.is-recommended {
-  outline: 2px solid var(--gold);
+  outline: 2px solid var(--olive);
 }
 .badge {
   position: absolute;
   top: calc(-1 * var(--space-xs) - 6px);
   left: var(--space-lg);
-  background: var(--gold);
-  color: var(--color-ink);
+  background: var(--olive);
+  color: #ffffff;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 6px 12px;
   border-radius: var(--radius-pill);
-  box-shadow: 0 8px 20px -8px rgba(212, 175, 55, 0.55);
+  box-shadow: 0 8px 20px -8px rgba(138, 143, 105, 0.55);
 }
 
 @media (max-width: 720px) {
@@ -1625,21 +1500,21 @@ body.nav-open { overflow: hidden; }
   width: min(900px, 120vw);
   height: min(700px, 80vw);
   background: radial-gradient(circle at center,
-              rgba(212, 175, 55, 0.55) 0%,
-              rgba(212, 175, 55, 0.22) 32%,
-              rgba(212, 175, 55, 0) 66%);
+              rgba(168, 102, 61, 0.55) 0%,
+              rgba(168, 102, 61, 0.22) 32%,
+              rgba(168, 102, 61, 0) 66%);
   filter: blur(10px);
   pointer-events: none;
   z-index: 0;
 }
 .finalcta .container { position: relative; z-index: 1; max-width: 760px; }
 .finalcta h2 {
-  color: var(--color-canvas);
+  color: #fff;
   font-size: clamp(27px, 4.6vw, 40px);
   margin-bottom: var(--space-lg);
 }
 .finalcta p {
-  color: rgba(253, 251, 247, 0.82);
+  color: rgba(242, 236, 225, 0.82);
   font-size: clamp(16px, 2.3vw, 19px);
   max-width: 56ch;
   margin-inline: auto;
@@ -1715,8 +1590,8 @@ body.nav-open { overflow: hidden; }
 .field__input:hover { border-color: rgba(140, 122, 102, 0.65); }
 .field__input:focus {
   outline: none;
-  border-color: var(--gold-deep);
-  box-shadow: 0 0 0 3px rgba(184, 145, 46, 0.28);
+  border-color: var(--olive-deep);
+  box-shadow: 0 0 0 3px rgba(138, 143, 105, 0.28);
 }
 .field__input--area { resize: vertical; min-height: 130px; }
 
@@ -1760,7 +1635,7 @@ body.nav-open { overflow: hidden; }
   transform: none;
 }
 .contact-form__submit[disabled]:hover {
-  background: var(--gold);
+  background: var(--olive);
   transform: none;
 }
 
@@ -1775,9 +1650,9 @@ body.nav-open { overflow: hidden; }
   border: 1px solid transparent;
 }
 .contact-card .contact-form__status.is-success {
-  color: var(--gold-text);
-  background: rgba(138, 109, 30, 0.12);
-  border-color: rgba(138, 109, 30, 0.4);
+  color: var(--olive-deep);
+  background: rgba(138, 143, 105, 0.12);
+  border-color: rgba(138, 143, 105, 0.4);
 }
 .contact-card .contact-form__status.is-error {
   color: #8E3E2C;
@@ -1794,13 +1669,13 @@ body.nav-open { overflow: hidden; }
    ========================================================================= */
 .site-footer {
   background: var(--color-ink);
-  color: rgba(253, 251, 247, 0.6);
+  color: rgba(242, 236, 225, 0.6);
   padding-block: var(--space-lg);
   text-align: center;
   font-size: 13px;
   letter-spacing: 0.02em;
 }
-.site-footer strong { color: rgba(253, 251, 247, 0.85); font-weight: 600; }
+.site-footer strong { color: rgba(242, 236, 225, 0.85); font-weight: 600; }
 
 /* =========================================================================
    Reveal on scroll — respeitando prefers-reduced-motion
@@ -1813,16 +1688,13 @@ body.nav-open { overflow: hidden; }
 }
 .reveal.is-visible { opacity: 1; transform: none; }
 
+/* Variante lateral — mesma classe/observer do .reveal, só troca a direção
+   de entrada (usada em fotos/cartões pontuais para dar variedade ao scroll,
+   em vez de tudo subir de baixo). */
+.reveal--right { transform: translateX(40px); }
+
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
   .reveal { opacity: 1; transform: none; }
   .btn:hover { transform: none; }
-
-  /* A regra acima já zera a duração de toda animação, mas "infinite" com
-     duração ~0 pisca em vez de simplesmente parar — a colagem precisa de
-     um "none" explícito, parada numa forma orgânica fixa (não numa elipse). */
-  .frame, .frame__inner, .collage__ring { animation: none !important; }
-  .frame__inner { border-radius: 52% 48% 47% 53% / 48% 50% 50% 52%; }
-  .frame--c .frame__inner { border-radius: 46% 54% 43% 57% / 32% 36% 64% 68%; }
-  .collage__ring { border-radius: 48% 52% 62% 38% / 55% 43% 57% 45%; }
 }

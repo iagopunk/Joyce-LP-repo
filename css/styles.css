@@ -803,6 +803,48 @@ body.nav-open { overflow: hidden; }
 }
 .rolfing-explainer p + p { margin-top: var(--space-md); }
 
+/* "Read more" — sem cartão/borda (diferente do FAQ), mas com peso de
+   subtítulo: bem visível pra quem quiser se aprofundar, centralizado, com
+   sublinhado que cresce no hover (mesma linguagem do menu do header). */
+.explainer-more { margin-top: var(--space-lg); text-align: center; }
+.explainer-more > summary {
+  position: relative;
+  cursor: pointer;
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(19px, 2.6vw, 23px);
+  color: var(--olive-deep);
+  padding-bottom: 3px;
+  transition: color 200ms ease;
+}
+.explainer-more > summary::-webkit-details-marker { display: none; }
+.explainer-more > summary::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 240ms ease;
+}
+.explainer-more > summary:hover,
+.explainer-more > summary:focus-visible { color: var(--olive); }
+.explainer-more > summary:hover::after,
+.explainer-more > summary:focus-visible::after,
+.explainer-more[open] > summary::after { transform: scaleX(1); }
+.explainer-more > summary .chev { flex: none; transition: transform 240ms ease; }
+.explainer-more[open] > summary .chev { transform: rotate(180deg); }
+.explainer-more__body { margin-top: var(--space-md); }
+.explainer-more__body p + p { margin-top: var(--space-md); }
+
 /* =========================================================================
    1.6 IDA ROLF QUOTE — moldura minimalista, traços orgânicos
    ========================================================================= */
@@ -868,8 +910,9 @@ body.nav-open { overflow: hidden; }
 .meet-teaser { max-width: 720px; margin-inline: auto; }
 .meet-teaser__label {
   margin: 0 0 var(--space-lg);
+  text-align: center;
   font-family: var(--font-display);
-  font-size: clamp(19px, 2.6vw, 22px);
+  font-size: clamp(19px, 2.6vw, 23px);
   font-style: italic;
 }
 

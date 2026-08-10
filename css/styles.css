@@ -284,7 +284,7 @@ summary:focus-visible,
 }
 
 /* Logo — PNG com fundo transparente, exibida inteira (sem recorte).
-   Só a altura é fixada; a largura acompanha a proporção 610×409. */
+   Só a altura é fixada; a largura acompanha a proporção do arquivo. */
 .brand {
   display: inline-flex;
   align-items: center;

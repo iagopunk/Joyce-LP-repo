@@ -54,13 +54,13 @@
 
   /* Header fixo — alto o bastante para a logo "Joy by Joyce" caber legível,
      incluindo a linha "Healthier Choices" na base da arte. */
-  --header-h: 106px;
+  --header-h: 95px;
 }
 @media (max-width: 900px) {
-  :root { --header-h: 95px; }
+  :root { --header-h: 149px; }
 }
 @media (max-width: 560px) {
-  :root { --header-h: 83px; }
+  :root { --header-h: 133px; }
 }
 
 /* Mobile-first: reduz respiração (~45%) abaixo de 768px */
@@ -266,8 +266,13 @@ summary:focus-visible,
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-md);
+  gap: 22px; /* var(--space-md) 24px, -10% para acompanhar o header */
   min-height: var(--header-h);
+}
+/* Mobile: respiro homogêneo entre a logo e as bordas do header — mesmo
+   valor usado na folga vertical (--header-h menos a altura da logo). */
+@media (max-width: 900px) {
+  .site-header .container { padding-inline: 14px; } /* var(--space-sm) 16px, -10% */
 }
 
 /* Estado rolado — vidro translúcido com blur, mesma família de cor do olive */
@@ -292,12 +297,12 @@ summary:focus-visible,
   flex: none;
 }
 .brand-logo {
-  height: 86px;
+  height: 77px;
   width: auto;
   flex: none;
 }
-@media (max-width: 900px) { .brand-logo { height: 75px; } }
-@media (max-width: 560px) { .brand-logo { height: 65px; } }
+@media (max-width: 900px) { .brand-logo { height: 120px; } }
+@media (max-width: 560px) { .brand-logo { height: 104px; } }
 
 /* Tagline "Healthier Choices" — só aparece quando o menu de seções sai da
    barra (vira hambúrguer), preenchendo o vão que sobra entre a logo e o
@@ -313,16 +318,18 @@ summary:focus-visible,
     flex: 1;
     min-width: 0;
     text-align: center;
+    /* Nudge left: a arte do logo (o "Y" de JOY) não vai até a borda do
+       elemento, deixando um respiro visual maior à esquerda do que a
+       direita — esse padding compensa e recentra opticamente o texto. */
+    padding-right: 14px;
     font-family: var(--font-body);
     font-weight: 600;
-    font-size: clamp(11px, 3vw, 14px);
-    letter-spacing: 0.14em;
+    font-size: clamp(10px, 2.7vw, 13px);
+    line-height: 1.25;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--header-fg);
     opacity: 0.8;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 }
 
@@ -381,8 +388,8 @@ summary:focus-visible,
   display: none;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   margin: 0;
   padding: 0;
   border: 1px solid rgba(255, 255, 255, 0.28);
@@ -397,8 +404,8 @@ summary:focus-visible,
 .nav-toggle__bars {
   position: relative;
   display: block;
-  width: 20px;
-  height: 14px;
+  width: 18px;
+  height: 13px;
 }
 .nav-toggle__bars span {
   position: absolute;
@@ -410,15 +417,15 @@ summary:focus-visible,
   transition: transform 260ms ease, opacity 180ms ease, top 260ms ease;
 }
 .nav-toggle__bars span:nth-child(1) { top: 0; }
-.nav-toggle__bars span:nth-child(2) { top: 6px; }
-.nav-toggle__bars span:nth-child(3) { top: 12px; }
+.nav-toggle__bars span:nth-child(2) { top: 5px; }
+.nav-toggle__bars span:nth-child(3) { top: 11px; }
 /* Vira um "X" quando aberto */
 .nav-toggle[aria-expanded="true"] .nav-toggle__bars span:nth-child(1) {
-  top: 6px; transform: rotate(45deg);
+  top: 5px; transform: rotate(45deg);
 }
 .nav-toggle[aria-expanded="true"] .nav-toggle__bars span:nth-child(2) { opacity: 0; }
 .nav-toggle[aria-expanded="true"] .nav-toggle__bars span:nth-child(3) {
-  top: 6px; transform: rotate(-45deg);
+  top: 5px; transform: rotate(-45deg);
 }
 
 /* Véu escuro atrás do painel mobile */
@@ -555,17 +562,20 @@ body.nav-open { overflow: hidden; }
   letter-spacing: -0.02em;
 }
 
-/* "JOY" em degradê dourado metálico — reproduz o gradiente da logo (claro
-   e vivo no topo das letras, escurecendo para um bronze ao descer). */
+/* "JOY" em degradê dourado metálico — cores extraídas por amostragem de
+   pixel do "J" grande da logo (assets/img/logo-joyce.png): highlight
+   claro no topo, ouro rico no meio, escurecendo para um bronze quase
+   preto na base — mesmo contraste dramático do metal da logo. */
 .hero__title-gold {
   background: linear-gradient(180deg,
-              #F9E9B8 0%,
-              #E8C158 28%,
-              #D4A017 58%,
-              #9C7A1E 100%);
+              #F2E2A8 0%,
+              #D6B36A 24%,
+              #AD7C3A 48%,
+              #764A1E 74%,
+              #2E1507 100%);
   -webkit-background-clip: text;
   background-clip: text;
-  color: #9C7A1E; /* fallback se background-clip:text não for suportado */
+  color: #764A1E; /* fallback se background-clip:text não for suportado */
   -webkit-text-fill-color: transparent;
 }
 

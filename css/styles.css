@@ -915,15 +915,42 @@ body.nav-open { overflow: hidden; }
 .rolf-quote__cite::before { content: "— "; }
 
 /* =========================================================================
+   1.65 KEY QUOTE — frase-chave leve, sem o tratamento ornamentado da
+   citação da Ida Rolf logo abaixo (evita repetir o mesmo visual 2x seguidas)
+   ========================================================================= */
+.key-quote-section { padding-block: calc(var(--section-y) * 0.45); }
+.key-quote {
+  position: relative;
+  max-width: 620px;
+  margin: 0 auto;
+  padding-block: var(--space-md);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(19px, 2.4vw, 23px);
+  line-height: 1.5;
+  text-align: center;
+  color: var(--olive-deep);
+}
+.key-quote::before,
+.key-quote::after {
+  content: "";
+  display: block;
+  width: 44px;
+  height: 1px;
+  margin: 0 auto var(--space-sm);
+  background: var(--olive);
+  opacity: 0.5;
+}
+.key-quote::after { margin: var(--space-sm) auto 0; }
+
+/* =========================================================================
    1.7 MEET JOYCE TEASER — foto, credenciais, oferta e CTA (vieram da hero)
    ========================================================================= */
 .meet-teaser { max-width: 720px; margin-inline: auto; }
 .meet-teaser__label {
   margin: 0 0 var(--space-lg);
   text-align: center;
-  font-family: var(--font-display);
-  font-size: clamp(19px, 2.6vw, 23px);
-  font-style: italic;
 }
 
 /* =========================================================================
@@ -966,6 +993,44 @@ body.nav-open { overflow: hidden; }
   border-radius: 2px;
 }
 .benefits-outro { margin-top: var(--space-lg); max-width: var(--measure); color: var(--color-taupe-deep); }
+
+/* Linha de 3 ícones ilustrados (line art gerada, ver assets/img/icon-*.png) —
+   respiro visual no meio da seção. Cada ícone tem proporção natural diferente
+   (figura alta/estreita, mão larga, ampulheta média), por isso a altura é
+   fixa e a largura livre, alinhados pela base (flex-end) em vez de forçar
+   todos no mesmo quadrado/círculo. */
+.benefit-cards {
+  margin-top: var(--space-xl);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+  max-width: 900px;
+}
+.benefit-card { text-align: center; }
+.benefit-card__icon {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: clamp(80px, 10vw, 108px);
+  margin-bottom: var(--space-md);
+}
+.benefit-card__icon img {
+  height: 100%;
+  width: auto;
+  display: block;
+}
+.benefit-card h3 {
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+.benefit-card p {
+  font-size: 15px;
+  color: var(--color-taupe-deep);
+  margin: 0;
+}
+@media (max-width: 720px) {
+  .benefit-cards { grid-template-columns: 1fr; max-width: 420px; margin-inline: auto; }
+}
 
 /* =========================================================================
    6. MEET JOYCE
@@ -1166,7 +1231,7 @@ body.nav-open { overflow: hidden; }
 
 .featured {
   display: grid;
-  grid-template-columns: 0.95fr 1.05fr;
+  grid-template-columns: 1.15fr 1fr;
   gap: clamp(28px, 5vw, 56px);
   align-items: center;
   background: var(--color-canvas-raised);
@@ -1180,6 +1245,7 @@ body.nav-open { overflow: hidden; }
   margin-bottom: var(--space-md);
 }
 .featured__figure {
+  margin: 0;
   border-radius: var(--radius-md);
   overflow: hidden;
   background: var(--color-mist);
@@ -1229,7 +1295,7 @@ body.nav-open { overflow: hidden; }
 }
 .featured--stacked .featured__figure {
   width: 100%;
-  max-width: 220px;
+  max-width: 260px;
   border-radius: 0;
   background: none;
   box-shadow: none;

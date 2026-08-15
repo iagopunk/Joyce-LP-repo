@@ -1054,6 +1054,14 @@ body.nav-open { overflow: hidden; }
 .meet__body { max-width: 620px; }
 .meet__body p + p { margin-top: var(--space-md); }
 .meet__body .lead { color: var(--color-ink); }
+.about-quote {
+  margin-top: var(--space-sm);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(18px, 2.2vw, 21px);
+  color: var(--olive-deep);
+}
 
 @media (max-width: 860px) {
   .meet__grid { grid-template-columns: 1fr; }

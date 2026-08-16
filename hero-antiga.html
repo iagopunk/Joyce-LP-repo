@@ -3,6 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- PÁGINA DE COMPARAÇÃO — cópia congelada da hero anterior (commit "hero
+       velha"), publicada só para a Joyce comparar as duas versões lado a lado.
+       noindex para o Google não indexar conteúdo duplicado do index.html, e
+       canonical apontando para a página real. Apagar depois da decisão. -->
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="canonical" href="index.html" />
+
   <title>Rolfing in Toronto | Whole-Body Relief for Chronic Tension &amp; Posture — Joyce Cruvinel, Certified Rolfer™</title>
   <meta name="description" content="Tried physio, massage, or chiropractic and the tension always comes back? Joyce Cruvinel, a Toronto-based Certified Rolfer™ with a background in physiotherapy and human kinesiology, offers a whole-body approach to chronic pain, posture, and tightness." />
 
@@ -64,29 +72,25 @@
     <div class="container">
       <div class="hero__grid">
         <div class="hero__content">
-          <p class="eyebrow">Rolfing® Structural Integration · Toronto &amp; the GTA</p>
+          <p class="eyebrow">Rolfing · Toronto</p>
 
-          <h1 class="hero__title">Feel <span class="hero__title-gold">JOY</span> with a more aligned, functional body.</h1>
-
-          <p class="hero__subtitle">Injuries, everyday compensations, and repetitive strain quietly tighten your fascia over the years. <span class="kw">Rolfing® Structural Integration</span> works with your whole structure &mdash; not one sore spot at a time &mdash; so your body can hold itself with less effort.</p>
-
-          <div class="hero__cta-row">
-            <a class="btn" href="#contact">
-              Ask Joyce about your case
-              <span class="btn__arrow" aria-hidden="true">→</span>
-            </a>
-          </div>
-
-          <!-- Cópia reduzida do diagrama, só no mobile: flutua à direita a partir
-               daqui (o texto contorna a figura). Saiu de dentro do <h1> para não
-               gastar altura da primeira dobra — o CTA acima precisa caber nela.
-               No desktop quem aparece é a cópia em .hero__diagram, na coluna da
-               direita. Mesmo arquivo nas duas, então não há download extra. -->
-          <p class="hero__subtitle"><span class="hero__diagram-figure hero__title-diagram">
+          <h1 class="hero__title">Feel <span class="hero__title-gold">JOY</span> with a more aligned, functional body! Release tightness and decrease chronic pain with
+            <!-- Cópia reduzida do diagrama, só no mobile: flutua à direita a
+                 partir daqui, ao lado de "Rolfing Structural Integration (SI)"
+                 (o texto contorna a figura). <span>, não <figure>, porque um
+                 <h1> só aceita phrasing content — a classe já força
+                 display:block via CSS, então o visual é idêntico. No desktop
+                 quem aparece é a cópia em .hero__diagram, na coluna da
+                 direita. Mesmo arquivo nas duas, então não há download extra. -->
+            <span class="hero__diagram-figure hero__title-diagram">
               <img src="assets/img/posture-alignment-diagram.png"
                    alt="Diagram comparing a body unevenly supported by mismatched, tilted blocks to one aligned along a single straight vertical line — illustrating the postural realignment Rolfing works toward."
                    width="493" height="780" />
-            </span>Chronic pain has many causes, but one of the most common is: body misalignment paired with poor posture, showing up as back pain or discomfort anywhere in the body.</p>
+            </span>
+            <span class="kw">Rolfing Structural Integration (SI)</span>.</h1>
+
+          <p class="hero__subtitle">Over time, injuries, everyday compensations, and repetitive strain build on chronic tension &mdash; quietly tightening and shortening your fascia without you noticing.</p>
+          <p class="hero__subtitle">Chronic pain has many causes, but one of the most common is: body misalignment paired with poor posture, showing up as back pain or discomfort anywhere in the body.</p>
 
           <!-- Foto que agora abre o bloco final da hero, acima do último parágrafo -->
           <div class="hero-photo reveal reveal--right">

@@ -784,7 +784,7 @@ body.nav-open { overflow: hidden; }
      que decide quanto do CTA ainda cabe na primeira dobra. */
   .hero__title-diagram {
     display: block;
-    width: clamp(120px, 32vw, 150px);
+    width: clamp(108px, 28.8vw, 135px);
     max-width: none;
     padding: 10px;
     margin: 0 auto var(--space-md);

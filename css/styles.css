@@ -775,22 +775,20 @@ body.nav-open { overflow: hidden; }
     grid-template-areas: "content";
   }
   /* No mobile o diagrama da coluna direita sai da hero — a cópia reduzida
-     em .hero__title-diagram (flutuando junto ao H1) assume o lugar dele. */
+     em .hero__title-diagram assume o lugar dele. */
   .hero__diagram { display: none; }
 
-  /* O diagrama flutua à direita e o título contorna a figura — complemento
-     do H1, não um bloco concorrendo com ele. Como só as primeiras linhas do
-     título estreitam, o texto continua confortável de ler. */
+  /* Bloco centralizado logo acima do CTA: o diagrama vira a última coisa que
+     se vê antes do botão, em vez de flutuar dentro do texto. Largura
+     proporcional à viewport porque, sem texto contornando, é a altura dele
+     que decide quanto do CTA ainda cabe na primeira dobra. */
   .hero__title-diagram {
     display: block;
-    float: right;
-    width: clamp(80px, 25vw, 118px);
+    width: clamp(120px, 32vw, 150px);
     max-width: none;
-    padding: 8px;
-    /* Calha proporcional: em telas muito estreitas cada pixel devolvido ao
-       título conta, então ela encolhe junto com a viewport. */
-    margin: 4px 0 var(--space-sm) clamp(14px, 4vw, 24px);
-    border-radius: var(--radius-sm);
+    padding: 10px;
+    margin: 0 auto var(--space-md);
+    border-radius: var(--radius-md);
   }
 
   .hero__intro-photo {
@@ -805,11 +803,9 @@ body.nav-open { overflow: hidden; }
     object-fit: unset;
   }
 
-  /* clear garante que o parágrafo seguinte — e principalmente a foto, que é
-     um bloco de largura total — comecem abaixo do diagrama, mesmo em telas
-     largas o bastante para o texto que o contorna caber em poucas linhas. */
-  .hero__subtitle,
-  .hero-photo { clear: right; }
+  /* Não há mais nenhum float na hero do mobile (o diagrama virou bloco
+     centralizado acima do CTA), então o antigo `clear: right` do subtítulo
+     saiu daqui — não tinha mais o que limpar. */
 
   .hero__subtitle, .microcopy { max-width: 48ch; }
   .quick-facts, .offer { max-width: none; }

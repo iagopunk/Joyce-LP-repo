@@ -70,6 +70,18 @@
 
           <p class="hero__subtitle">Injuries, everyday compensations, and repetitive strain quietly tighten your fascia over the years. <span class="kw">Rolfing® Structural Integration</span> works with your whole structure &mdash; not one sore spot at a time &mdash; so your body can hold itself with less effort.</p>
 
+          <!-- Cópia do diagrama exibida só no mobile, como bloco centralizado
+               logo acima do CTA (no desktop quem aparece é a cópia em
+               .hero__diagram, na coluna da direita). Agora é <figure>, e não
+               <span>, porque saiu de dentro de texto corrido e passou a ser
+               filho direto da coluna. Mesmo arquivo nas duas, então não há
+               download extra. -->
+          <figure class="hero__diagram-figure hero__title-diagram">
+            <img src="assets/img/posture-alignment-diagram.png"
+                 alt="Diagram comparing a body unevenly supported by mismatched, tilted blocks to one aligned along a single straight vertical line — illustrating the postural realignment Rolfing works toward."
+                 width="493" height="780" />
+          </figure>
+
           <div class="hero__cta-row">
             <a class="btn" href="#contact">
               Ask Joyce about your case
@@ -77,16 +89,7 @@
             </a>
           </div>
 
-          <!-- Cópia reduzida do diagrama, só no mobile: flutua à direita a partir
-               daqui (o texto contorna a figura). Saiu de dentro do <h1> para não
-               gastar altura da primeira dobra — o CTA acima precisa caber nela.
-               No desktop quem aparece é a cópia em .hero__diagram, na coluna da
-               direita. Mesmo arquivo nas duas, então não há download extra. -->
-          <p class="hero__subtitle"><span class="hero__diagram-figure hero__title-diagram">
-              <img src="assets/img/posture-alignment-diagram.png"
-                   alt="Diagram comparing a body unevenly supported by mismatched, tilted blocks to one aligned along a single straight vertical line — illustrating the postural realignment Rolfing works toward."
-                   width="493" height="780" />
-            </span>Chronic pain has many causes, but one of the most common is: body misalignment paired with poor posture, showing up as back pain or discomfort anywhere in the body.</p>
+          <p class="hero__subtitle">Chronic pain has many causes, but one of the most common is: body misalignment paired with poor posture, showing up as back pain or discomfort anywhere in the body.</p>
 
           <!-- Foto que agora abre o bloco final da hero, acima do último parágrafo -->
           <div class="hero-photo reveal reveal--right">

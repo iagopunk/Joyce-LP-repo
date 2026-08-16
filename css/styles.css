@@ -155,6 +155,18 @@ strong { font-weight: 600; }
 }
 @media (max-width: 768px) { .eyebrow { font-size: 12px; } }
 
+/* Modalidade em destaque dentro do eyebrow (hero): olive, mais peso e maior
+   que o resto da linha, deixando a região ("· Toronto") como informação
+   secundária em taupe. Tamanho em em para acompanhar o eyebrow no mobile;
+   letter-spacing um pouco menor porque o valor do eyebrow (0.14em) fica
+   largo demais quando aplicado a um corpo maior. */
+.eyebrow__kw {
+  color: var(--olive-deep);
+  font-weight: 700;
+  font-size: 1.3em;
+  letter-spacing: 0.1em;
+}
+
 .section-title {
   font-size: clamp(26px, 4.4vw, 36px);
   max-width: 35ch;

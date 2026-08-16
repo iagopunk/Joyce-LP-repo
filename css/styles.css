@@ -787,12 +787,15 @@ body.nav-open { overflow: hidden; }
     width: clamp(108px, 28.8vw, 135px);
     max-width: none;
     padding: 10px;
-    /* --space-lg dos dois lados: o parágrafo acima já fecha com essa margem,
-       então igualar aqui deixa a figura opticamente centrada entre o texto e
-       o botão (as margens adjacentes colapsam, não somam). */
-    margin: 0 auto var(--space-lg);
+    margin: 0 auto var(--space-md);
     border-radius: var(--radius-md);
   }
+
+  /* Vão igual acima e abaixo do diagrama: o parágrafo que o antecede fecha
+     com a mesma margem que a figura usa embaixo (--space-md). Fica no media
+     query porque no desktop a figura some e esse parágrafo passa a encostar
+     direto no CTA, onde a margem maior é a certa. */
+  .hero__subtitle--tight { margin-bottom: var(--space-md); }
 
   .hero__intro-photo {
     width: 100%;

@@ -787,7 +787,10 @@ body.nav-open { overflow: hidden; }
     width: clamp(108px, 28.8vw, 135px);
     max-width: none;
     padding: 10px;
-    margin: 0 auto var(--space-md);
+    /* --space-lg dos dois lados: o parágrafo acima já fecha com essa margem,
+       então igualar aqui deixa a figura opticamente centrada entre o texto e
+       o botão (as margens adjacentes colapsam, não somam). */
+    margin: 0 auto var(--space-lg);
     border-radius: var(--radius-md);
   }
 

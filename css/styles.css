@@ -1808,6 +1808,115 @@ body.nav-open { overflow: hidden; }
 }
 
 /* =========================================================================
+   12.2 CONTATO DIRETO — telefone, endereço e disponibilidade, abaixo do
+   formulário. Sem cartão: ficam direto sobre o fundo escuro do CTA final,
+   para lerem como alternativa secundária ao formulário, que é a ação
+   principal. Todas as cores saem do canvas (#F2ECE1) em opacidades
+   diferentes, para o bloco inteiro pertencer ao mesmo fundo escuro.
+   ========================================================================= */
+.contact-direct {
+  position: relative;
+  z-index: 1;
+  margin-top: var(--space-xl);
+}
+
+.contact-direct__title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(19px, 3vw, 23px);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #fff;
+  margin-bottom: var(--space-lg);
+}
+
+.contact-direct__list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-lg) var(--space-md);
+  align-items: start;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.contact-item__icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 14px;
+  border-radius: 50%;
+  color: var(--color-mist);
+  background: rgba(242, 236, 225, 0.07);
+  border: 1px solid rgba(242, 236, 225, 0.20);
+  transition: border-color 260ms ease, color 260ms ease, background-color 260ms ease;
+}
+.contact-item__icon svg { width: 22px; height: 22px; display: block; }
+
+.contact-item__label {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(242, 236, 225, 0.58);
+  margin-bottom: 6px;
+}
+
+.contact-item__value {
+  font-size: 17px;
+  line-height: 1.45;
+  font-weight: 500;
+  color: #F2ECE1;
+  text-decoration: none;
+}
+/* Só os itens acionáveis (telefone e endereço) ganham sublinhado e hover —
+   "Availability" é texto, e não pode parecer clicável. */
+a.contact-item__value {
+  border-bottom: 1px solid rgba(242, 236, 225, 0.28);
+  padding-bottom: 2px;
+  transition: color 220ms ease, border-color 220ms ease;
+}
+a.contact-item__value:hover {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+/* Acende o ícone junto com o link. Depende de :has(); onde não houver
+   suporte o hover do próprio link continua valendo — só o ícone não muda. */
+.contact-item:has(a.contact-item__value:hover) .contact-item__icon {
+  color: var(--gold);
+  border-color: rgba(227, 182, 43, 0.55);
+  background: rgba(227, 182, 43, 0.10);
+}
+
+/* Dois níveis de classe para vencer a regra `.finalcta p`, que centraliza e
+   limita a largura de todo parágrafo da seção. */
+.contact-direct .contact-item__note {
+  margin-top: 8px;
+  max-width: 26ch;
+  margin-inline: auto;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: rgba(242, 236, 225, 0.52);
+}
+
+@media (max-width: 720px) {
+  .contact-direct__list {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+  .contact-direct { margin-top: var(--space-lg); }
+}
+
+/* =========================================================================
    Footer
    ========================================================================= */
 .site-footer {

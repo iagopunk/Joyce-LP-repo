@@ -1190,38 +1190,8 @@ body.nav-open { overflow: hidden; }
 
 .expect__outro { margin-top: var(--space-xl); max-width: var(--measure); }
 
-/* Foto de antes/depois que fecha esta seção — só no mobile, onde a hero é
-   uma coluna só e sobra espaço para ela respirar. Escondida no desktop, que
-   já mostra as mesmas fotos na galeria de depoimentos. */
-.expect__photo-mobile { display: none; }
-
 @media (max-width: 720px) {
   .steps { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 860px) {
-  .expect__photo-mobile {
-    display: block;
-    margin: var(--space-lg) 0 0;
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    background: var(--color-canvas-raised);
-    box-shadow: 0 16px 40px -30px rgba(var(--color-hairless-shadow), 0.4);
-  }
-  /* height:auto preserva a proporção original — a imagem aparece inteira,
-     sem nenhum recorte. */
-  .expect__photo-mobile img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-  .expect__photo-mobile figcaption {
-    font-size: 13px;
-    line-height: 1.5;
-    color: var(--color-taupe);
-    padding: var(--space-sm) var(--space-md);
-    text-align: center;
-  }
 }
 
 /* =========================================================================

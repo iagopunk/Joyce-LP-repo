@@ -265,9 +265,6 @@
       track.style.transform = "translate3d(" + offset + "px, 0, 0)";
       updateHeight();
 
-      if (prevBtn) prevBtn.disabled = index === 0;
-      if (nextBtn) nextBtn.disabled = index === slides.length - 1;
-
       dots.forEach(function (dot, i) {
         dot.classList.toggle("is-active", i === index);
         dot.setAttribute("aria-selected", i === index ? "true" : "false");
@@ -277,9 +274,21 @@
       });
     }
 
+    // Navegação circular: passar do último volta ao primeiro (e vice-versa).
+    // O salto de ponta a ponta é feito sem transição — animar o track por cima
+    // de todos os slides intermediários daria um "rebobinar" longo e feio.
     function goTo(i) {
-      index = Math.max(0, Math.min(slides.length - 1, i));
-      render(true);
+      var count = slides.length;
+      var target = ((i % count) + count) % count;
+      var wrapped = Math.abs(target - index) > 1;
+      index = target;
+      render(!wrapped);
+      if (wrapped) {
+        // Reflow antes de devolver a transição: sem isso o próximo clique
+        // ainda herdaria o estado sem animação.
+        void track.offsetWidth;
+        track.classList.remove("is-dragging");
+      }
     }
 
     if (prevBtn) prevBtn.addEventListener("click", function () { goTo(index - 1); });
@@ -320,10 +329,6 @@
     function onPointerMove(e) {
       if (!dragging || e.pointerId !== pointerId) return;
       deltaX = e.clientX - startX;
-      // Impede arrasto além da primeira/última lâmina (resistência leve).
-      if ((index === 0 && deltaX > 0) || (index === slides.length - 1 && deltaX < 0)) {
-        deltaX *= 0.35;
-      }
       render(false);
     }
 
@@ -331,13 +336,12 @@
       if (!dragging) return;
       dragging = false;
       var threshold = Math.min(80, viewportWidth * 0.18);
-      if (deltaX <= -threshold) {
-        index = Math.min(slides.length - 1, index + 1);
-      } else if (deltaX >= threshold) {
-        index = Math.max(0, index - 1);
-      }
+      var step = 0;
+      if (deltaX <= -threshold) step = 1;
+      else if (deltaX >= threshold) step = -1;
       deltaX = 0;
-      render(true);
+      if (step) goTo(index + step);
+      else render(true);
     }
 
     viewport.addEventListener("pointerdown", onPointerDown);

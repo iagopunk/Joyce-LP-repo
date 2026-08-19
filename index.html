@@ -26,18 +26,22 @@
        =================================================================== -->
   <header class="site-header" id="siteHeader">
     <div class="container header-inner">
-      <a class="brand" href="#hero" aria-label="Joy by Joyce — Healthier Choices — back to top">
-        <img class="brand-logo" src="assets/img/logo-joyce.png"
-             alt="Joy by Joyce — Healthier Choices"
-             width="631" height="382" />
-      </a>
+      <!-- No mobile cada slot ocupa metade da barra (ver .header-slot no CSS);
+           no desktop os slots viram display:contents e somem do layout. -->
+      <div class="header-slot header-slot--brand">
+        <a class="brand" href="#hero" aria-label="Joy by Joyce — Healthier Choices — back to top">
+          <img class="brand-logo" src="assets/img/logo-joyce.png"
+               alt="Joy by Joyce — Healthier Choices"
+               width="631" height="382" />
+        </a>
+      </div>
 
-      <p class="header-tagline" aria-hidden="true">Healthier<br />Choices</p>
-
-      <button class="nav-toggle" id="navToggle" type="button"
-              aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
-        <span class="nav-toggle__bars" aria-hidden="true"><span></span><span></span><span></span></span>
-      </button>
+      <div class="header-slot header-slot--nav">
+        <button class="nav-toggle" id="navToggle" type="button"
+                aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+          <span class="nav-toggle__bars" aria-hidden="true"><span></span><span></span><span></span></span>
+        </button>
+      </div>
 
       <nav class="site-nav" id="primaryNav" aria-label="Primary">
         <ul class="site-nav__list">
@@ -70,12 +74,10 @@
 
           <p class="hero__subtitle hero__subtitle--tight">Injuries, everyday compensations, and repetitive strain quietly tighten your fascia over the years. <span class="kw">Rolfing®</span> works with your whole structure &mdash; not one sore spot at a time &mdash; so your body can hold itself with less effort.</p>
 
-          <!-- Cópia do diagrama exibida só no mobile, como bloco centralizado
-               logo acima do CTA (no desktop quem aparece é a cópia em
-               .hero__diagram, na coluna da direita). Agora é <figure>, e não
-               <span>, porque saiu de dentro de texto corrido e passou a ser
-               filho direto da coluna. Mesmo arquivo nas duas, então não há
-               download extra. -->
+          <!-- Diagrama postural — bloco centralizado logo abaixo do primeiro
+               parágrafo, em todas as larguras (antes havia uma segunda cópia
+               numa coluna à direita, só no desktop; a hero virou coluna única
+               centrada e essa coluna deixou de existir). -->
           <figure class="hero__diagram-figure hero__title-diagram">
             <img src="assets/img/posture-alignment-diagram.png"
                  alt="Diagram comparing a body unevenly supported by mismatched, tilted blocks to one aligned along a single straight vertical line — illustrating the postural realignment Rolfing works toward."
@@ -101,14 +103,6 @@
           </div>
 
           <p class="hero__subtitle">As a holistic therapy, <span class="kw">Rolfing (SI)</span> helps improve postural misalignments, making the body more aligned and balanced. It allows the body to feel more at ease requiring less effort to move. Normally an increased sensation of well-being is reported by those who experience Rolfing.</p>
-        </div>
-
-        <div class="hero__diagram">
-          <figure class="hero__diagram-figure">
-            <img src="assets/img/posture-alignment-diagram.png"
-                 alt="Diagram comparing a body unevenly supported by mismatched, tilted blocks to one aligned along a single straight vertical line — illustrating the postural realignment Rolfing works toward."
-                 width="493" height="780" />
-          </figure>
         </div>
       </div>
     </div>
@@ -277,9 +271,6 @@ by releasing and reorganizing the connective tissues, called fascia. It potentia
             <h2 class="section-title reveal" id="meet-title">Who You&rsquo;re Actually Trusting With Your Body</h2>
             <p class="about-quote reveal">&ldquo;Joyce is a holistic practitioner with a passion for natural health.&rdquo;</p>
             <p class="lead reveal" style="margin-top:var(--space-md);">Joyce Cruvinel is a <span class="kw">Certified Rolfer™</span>, trained at the Rolf Institute of Structural Integration in Boulder, Colorado — the institute founded by Dr. Ida Rolf herself, which has certified Rolfers worldwide since the method began. She also holds a Bachelor of Science in Physiotherapy and a Master&rsquo;s degree in Human Kinesiology, and is a fully trained Pilates teacher with a background in post-rehabilitative Pilates.</p>
-            <p class="reveal">She didn&rsquo;t arrive at Rolfing as an outsider looking in. She experienced what it could do for her own body first — resolving her own pain and correcting her own imbalances — before training to bring it to others. Out of everything she&rsquo;s studied, it&rsquo;s the tool she reaches for first.</p>
-            <p class="reveal">Many of her long-time Pilates students — people she had already worked with for years — made the switch to Rolfing entirely on their own, after feeling firsthand what a whole-body approach could offer that isolated treatment couldn&rsquo;t.</p>
-            <p class="reveal">She works with a deliberately small caseload, which means your sessions are shaped around your body and your history — not a general protocol repeated for everyone.</p>
 
             <details class="explainer-more reveal">
               <summary>Learn more <span class="chev" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></summary>
@@ -787,8 +778,8 @@ by releasing and reorganizing the connective tissues, called fascia. It potentia
           </details>
 
           <details class="faq__item reveal">
-            <summary>Do I need a doctor&rsquo;s referral? <span class="chev" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></summary>
-            <div class="faq__answer"><p>No referral is required to book a session.</p></div>
+            <summary>Is Rolfing covered by health insurance? <span class="chev" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></summary>
+            <div class="faq__answer"><p>Rolfing&reg; is commonly not covered by most health insurances in Ontario. However, you can check with your own insurance provider, as a few providers can cover it. Receipts can be provided for tax deduction purposes.</p></div>
           </details>
 
           <details class="faq__item reveal">
@@ -806,7 +797,7 @@ by releasing and reorganizing the connective tissues, called fascia. It potentia
       <div class="finalcta__glow" aria-hidden="true"></div>
       <div class="container">
         <h2 id="final-title">Your Body Isn&rsquo;t Broken. It&rsquo;s Been Compensating for a Long Time.</h2>
-        <p>Joyce keeps a deliberately small caseload so she can give each person real attention — which also means it&rsquo;s worth reaching out sooner rather than later.</p>
+        <p>Joyce keeps a deliberately small caseload so she can give each person real attention.</p>
 
         <!-- Formulário de contato — cartão claro sobre o fundo escuro do CTA final.
              Envio via Web3Forms: o POST sai do navegador direto para a API deles,

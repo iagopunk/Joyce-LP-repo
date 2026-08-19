@@ -285,6 +285,22 @@ summary:focus-visible,
    valor usado na folga vertical (--header-h menos a altura da logo). */
 @media (max-width: 900px) {
   .site-header .container { padding-inline: 14px; } /* var(--space-sm) 16px, -10% */
+  /* Barra dividida ao meio: logo centrada na metade esquerda, hambúrguer
+     centrado na direita. */
+  .header-inner { gap: 0; }
+}
+
+/* Slots de meia barra — só existem no mobile; no desktop viram display:contents
+   e o layout volta a ser logo à esquerda + menu inline à direita. */
+.header-slot { display: contents; }
+@media (max-width: 900px) {
+  .header-slot {
+    display: flex;
+    flex: 1 1 0;
+    min-width: 0;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 /* Estado rolado — vidro translúcido com blur, mesma família de cor do olive */
@@ -313,43 +329,23 @@ summary:focus-visible,
   width: auto;
   flex: none;
 }
-@media (max-width: 900px) { .brand-logo { height: 120px; } }
-@media (max-width: 560px) { .brand-logo { height: 104px; } }
-
-/* Tagline "Healthier Choices" — só aparece quando o menu de seções sai da
-   barra (vira hambúrguer), preenchendo o vão que sobra entre a logo e o
-   botão nesse layout de 2 elementos (ver .header-inner, justify-content:
-   space-between). No desktop o próprio menu ocupa esse espaço. */
-.header-tagline {
-  display: none;
-  margin: 0;
-}
 @media (max-width: 900px) {
-  .header-tagline {
-    display: block;
-    flex: 1;
-    min-width: 0;
-    text-align: center;
-    /* Nudge left: a arte do logo (o "Y" de JOY) não vai até a borda do
-       elemento, deixando um respiro visual maior à esquerda do que a
-       direita — esse padding compensa e recentra opticamente o texto. */
-    padding-right: 14px;
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: clamp(10px, 2.7vw, 13px);
-    line-height: 1.25;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--header-fg);
-    opacity: 0.8;
-  }
+  /* A arte do PNG começa ~7px (na escala mobile) depois da borda esquerda do
+     arquivo; a margem à direita compensa isso e centra a logo opticamente
+     dentro da metade dela. */
+  .brand-logo { height: 120px; margin-right: 7px; }
 }
+@media (max-width: 560px) { .brand-logo { height: 104px; } }
+/* Telas estreitas: a logo tem que caber na metade da barra (largura ≈ 1,65x
+   a altura), senão ela invade o lado do hambúrguer. */
+@media (max-width: 420px) { .brand-logo { height: 92px; } }
+@media (max-width: 360px) { .brand-logo { height: 84px; } }
 
 /* ---- Menu de seções ----------------------------------------------------- */
 .site-nav__list {
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 4px;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -357,10 +353,10 @@ summary:focus-visible,
 .site-nav__link {
   display: block;
   position: relative;
-  padding: 8px 10px;
+  padding: 8px 12px;
   color: var(--header-fg);
   font-family: var(--font-body);
-  font-size: 14.5px;
+  font-size: 16px;
   font-weight: 500;
   line-height: 1.2;
   letter-spacing: 0.01em;
@@ -373,8 +369,8 @@ summary:focus-visible,
 .site-nav__link::after {
   content: "";
   position: absolute;
-  left: 10px;
-  right: 10px;
+  left: 12px;
+  right: 12px;
   bottom: 2px;
   height: 2px;
   border-radius: 2px;
@@ -391,8 +387,8 @@ summary:focus-visible,
 .site-nav__link.is-active { color: var(--gold); }
 
 @media (max-width: 1060px) {
-  .site-nav__link { font-size: 13.5px; padding: 8px 8px; }
-  .site-nav__link::after { left: 8px; right: 8px; }
+  .site-nav__link { font-size: 14.5px; padding: 8px 9px; }
+  .site-nav__link::after { left: 9px; right: 9px; }
 }
 
 /* ---- Botão hambúrguer (só no mobile) ------------------------------------ */
@@ -453,7 +449,13 @@ summary:focus-visible,
 
 /* ---- Mobile: painel deslizante sob o header ----------------------------- */
 @media (max-width: 900px) {
-  .nav-toggle { display: inline-flex; }
+  .nav-toggle {
+    display: inline-flex;
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+  }
+  .nav-toggle__bars { width: 20px; }
 
   .site-nav {
     position: fixed;
@@ -558,20 +560,27 @@ body.nav-open { overflow: hidden; }
 .hero__grid {
   position: relative;
   z-index: 1;
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  grid-template-areas: "content diagram";
-  gap: 22px clamp(32px, 6vw, 80px);
-  align-items: start;
 }
 
-.hero__content { grid-area: content; max-width: 620px; }
+/* Coluna única centrada, na mesma largura e no mesmo eixo do explicador da
+   seção "What is Rolfing" logo abaixo (.rolfing-explainer, 720px). */
+.hero__content {
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+/* Como na seção de baixo: sobrancelha, título e CTA centrados; parágrafos
+   seguem alinhados à esquerda, com o bloco de texto centrado na coluna. */
+.hero__content > .eyebrow,
+.hero .hero__cta-row { text-align: center; }
+.hero__content > .hero__subtitle { margin-inline: auto; }
 
 .hero__title {
   font-size: clamp(34px, 6.2vw, 56px);
   line-height: 1.06;
   margin-bottom: var(--space-md);
   letter-spacing: -0.02em;
+  text-align: center;
 }
 
 /* "JOY" em degradê dourado metálico — cores extraídas por amostragem de
@@ -694,15 +703,8 @@ body.nav-open { overflow: hidden; }
   .trustline li:not(:first-child)::before { display: none; }
 }
 
-/* Diagrama de alinhamento postural — complemento discreto do H1: encostado
-   no topo da coluna direita e centralizado nela, para o conjunto do hero
-   ficar balanceado no container (mesmo eixo de centro das demais seções). */
-.hero__diagram {
-  grid-area: diagram;
-  display: flex;
-  justify-content: center;
-  align-self: start;
-}
+/* Diagrama de alinhamento postural — cartão centrado sob o primeiro
+   parágrafo da hero. */
 .hero__diagram-figure {
   width: 100%;
   max-width: 168px;
@@ -766,36 +768,27 @@ body.nav-open { overflow: hidden; }
   margin: 0 auto var(--space-lg);
 }
 
-/* Cópia reduzida do diagrama que acompanha o H1 — existe só no mobile. */
-.hero__title-diagram { display: none; }
+/* Vão igual acima e abaixo do diagrama: o parágrafo que o antecede fecha com
+   a mesma margem que a figura usa embaixo. */
+.hero__subtitle--tight { margin-bottom: var(--space-md); }
+
+/* Diagrama sob o primeiro parágrafo — centrado na coluna. */
+.hero__title-diagram {
+  display: block;
+  width: clamp(108px, 14vw, 180px);
+  max-width: none;
+  padding: 10px;
+  margin: 0 auto var(--space-lg);
+  border-radius: var(--radius-md);
+}
 
 @media (max-width: 860px) {
-  .hero__grid {
-    grid-template-columns: 1fr;
-    grid-template-areas: "content";
-  }
-  /* No mobile o diagrama da coluna direita sai da hero — a cópia reduzida
-     em .hero__title-diagram assume o lugar dele. */
-  .hero__diagram { display: none; }
-
-  /* Bloco centralizado logo acima do CTA: o diagrama vira a última coisa que
-     se vê antes do botão, em vez de flutuar dentro do texto. Largura
-     proporcional à viewport porque, sem texto contornando, é a altura dele
-     que decide quanto do CTA ainda cabe na primeira dobra. */
+  /* Largura proporcional à viewport porque é a altura do diagrama que decide
+     quanto do CTA ainda cabe na primeira dobra. */
   .hero__title-diagram {
-    display: block;
     width: clamp(108px, 28.8vw, 135px);
-    max-width: none;
-    padding: 10px;
-    margin: 0 auto var(--space-md);
-    border-radius: var(--radius-md);
+    margin-bottom: var(--space-md);
   }
-
-  /* Vão igual acima e abaixo do diagrama: o parágrafo que o antecede fecha
-     com a mesma margem que a figura usa embaixo (--space-md). Fica no media
-     query porque no desktop a figura some e esse parágrafo passa a encostar
-     direto no CTA, onde a margem maior é a certa. */
-  .hero__subtitle--tight { margin-bottom: var(--space-md); }
 
   .hero__intro-photo {
     width: 100%;

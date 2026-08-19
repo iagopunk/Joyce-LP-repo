@@ -821,6 +821,14 @@ body.nav-open { overflow: hidden; }
   margin-bottom: var(--space-lg);
 }
 .rolfing-explainer p + p { margin-top: var(--space-md); }
+/* Subtítulo dentro do explicador (ex.: "Can Rolfing Help With Scoliosis?") —
+   quebra o bloco corrido de texto e dá um gancho visível pra quem chega
+   procurando especificamente por escoliose. */
+.rolfing-explainer h3 {
+  font-size: clamp(19px, 2.6vw, 22px);
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-sm);
+}
 
 /* "Read more" — sem cartão/borda (diferente do FAQ), mas com peso de
    subtítulo: bem visível pra quem quiser se aprofundar, centralizado, com
@@ -1181,7 +1189,6 @@ body.nav-open { overflow: hidden; }
 }
 .step p { font-size: 16px; color: var(--color-taupe-deep); }
 
-.expect__outro { margin-top: var(--space-xl); max-width: var(--measure); }
 
 @media (max-width: 720px) {
   .steps { grid-template-columns: 1fr; }
@@ -1406,6 +1413,9 @@ body.nav-open { overflow: hidden; }
 /* Galeria de fotos sem identificação */
 .gallery {
   margin-top: var(--space-2xl);
+  /* Sem isto a legenda encosta no texto que vem logo abaixo. Colapsa com a
+     margem do parágrafo seguinte, então nunca soma duas vezes. */
+  margin-bottom: var(--space-xl);
 }
 .gallery__grid {
   display: grid;

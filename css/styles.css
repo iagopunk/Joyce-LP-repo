@@ -1009,7 +1009,6 @@ body.nav-open { overflow: hidden; }
   background: var(--color-taupe);
   border-radius: 2px;
 }
-.benefits-outro { margin-top: var(--space-lg); max-width: var(--measure); color: var(--color-taupe-deep); }
 
 /* Linha de 3 ícones ilustrados (line art gerada, ver assets/img/icon-*.png) —
    respiro visual no meio da seção. Cada ícone tem proporção natural diferente
@@ -1081,6 +1080,11 @@ body.nav-open { overflow: hidden; }
   font-weight: 500;
   font-size: clamp(18px, 2.2vw, 21px);
   color: var(--olive-deep);
+  /* Virou <h2> para a secao voltar a ter titulo, mas continua com cara de
+     frase de abertura: desfaz o line-height e o tracking apertados que o
+     seletor de heading aplicaria. */
+  line-height: 1.7;
+  letter-spacing: normal;
 }
 
 @media (max-width: 860px) {

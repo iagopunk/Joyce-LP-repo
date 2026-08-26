@@ -1071,6 +1071,9 @@ body.nav-open { overflow: hidden; }
 .meet__body { max-width: 620px; }
 .meet__body p + p { margin-top: var(--space-md); }
 .meet__body .lead { color: var(--color-ink); }
+/* Sem o titulo acima, a citacao abre o bloco: a margem que a separava do h2
+   viraria um desalinhamento com o topo da foto ao lado. */
+.about-quote:first-child { margin-top: 0; }
 .about-quote {
   margin-top: var(--space-sm);
   font-family: var(--font-display);
@@ -1563,9 +1566,17 @@ body.nav-open { overflow: hidden; }
   max-width: var(--measure);
 }
 
+/* Vem logo depois da nota de taxas, como segunda linha da mesma ideia — por
+   isso margem curta, pra ler como um par e nao como um bloco novo. */
+.price-promo-note {
+  margin-top: var(--space-xs);
+  font-size: 15px;
+  color: var(--color-taupe-deep);
+  max-width: var(--measure);
+}
+
 .pricing__closing { margin-top: var(--space-xl); max-width: var(--measure); }
 .pricing__closing p + p { margin-top: var(--space-md); }
-.pricing__scarcity { color: var(--color-taupe-deep); font-size: 16px; }
 
 /* =========================================================================
    11. COMMON QUESTIONS — FAQ accordion

@@ -172,7 +172,13 @@
     if (atBottom) current = targets[targets.length - 1];
 
     links.forEach(function (link) {
-      link.classList.toggle("is-active", !!current && byId[current.id] === link);
+      var isActive = !!current && byId[current.id] === link;
+      link.classList.toggle("is-active", isActive);
+      if (isActive) {
+        link.setAttribute("aria-current", "true");
+      } else {
+        link.removeAttribute("aria-current");
+      }
     });
   }
 

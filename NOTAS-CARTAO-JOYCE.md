@@ -12,9 +12,12 @@ Ler isto ANTES de mexer no cartão. O cartão vive como artifact, não neste rep
 - Preferência dela: **sem foto**. No máximo algo bem pequeno num canto.
 
 **Layout — aprovado**
-- Gostou do "lado da logo" do cartão (falado como "lado da lago" — confirmar com ela se é o lado da logo ou outra coisa).
+- Gostou do **lado da logo** do cartão (a frente limpa, só a logo — opções A/B).
 - Gostou do QR code embaixo, do mesmo lado, **igual às primeiras opções**. Não mudar isso.
 
 ## Pendente com ela
 
 - Quais trabalhos entram no cartão (pilates, nutrição, etc.). Ela ainda vai passar a lista — não chutar, esperar.
+
+> Esse mesmo feedback também está registrado como anotação dentro do artifact,
+> acima da opção A no canvas.

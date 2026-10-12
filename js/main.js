@@ -431,6 +431,10 @@
         if (result.ok && result.data && result.data.success) {
           form.reset();
           form.classList.remove("is-validated");
+          // Conversão principal. Sem nome, e-mail nem texto da mensagem no
+          // dataLayer: é dado de saúde e não deve ir para ferramenta de anúncio.
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({ event: "generate_lead", lead_method: "contact_form" });
           showStatus(
             "Your message has been sent! We’ll be in touch shortly.",
             "success"
@@ -448,5 +452,36 @@
       .then(function () {
         setSending(false);
       });
+  });
+})();
+
+/* Rastreamento — empurra eventos para o dataLayer; quem os lê é o GTM.
+   Cliques de CTA e de SMS usam um único listener no document (delegação),
+   então não é preciso marcar cada botão no HTML. A conversão principal
+   (generate_lead, envio do formulário) é disparada no bloco do formulário. */
+(function () {
+  "use strict";
+
+  window.dataLayer = window.dataLayer || [];
+
+  document.addEventListener("click", function (e) {
+    var link = e.target.closest ? e.target.closest("a[href]") : null;
+    if (!link) return;
+
+    var href = link.getAttribute("href") || "";
+
+    if (href.indexOf("sms:") === 0) {
+      window.dataLayer.push({ event: "sms_click" });
+      return;
+    }
+
+    // Botões que levam ao formulário (hero, preços etc.): mede qual seção converte.
+    if (href === "#contact" && link.classList.contains("btn")) {
+      var section = link.closest("section");
+      window.dataLayer.push({
+        event: "cta_click",
+        cta_location: (section && section.id) || "unknown"
+      });
+    }
   });
 })();

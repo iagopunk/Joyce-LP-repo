@@ -3,6 +3,7 @@
 Ler isto ANTES de mexer no cartão. O cartão vive como artifact, não neste repo:
 
 - **Cartao Joyce Cruvinel com foto** (versão atual) — https://claude.ai/code/artifact/495c3417-14fe-476e-8c48-6db23119232c
+- Cartao de Visita Joyce Cruvinel (versão anterior, 29/08) — https://claude.ai/code/artifact/0774e9dd-762e-42ed-85bb-5a6f67f250a1
 
 O canvas tem 4 variações: A (Main/Back, fundo areia), B (FrenteB/BackB, fundo oliva), C (BackC,
 verso alternativo) e D (FrenteD/BackD, versão antiga sem QR). A e B são as aprovadas por ela.

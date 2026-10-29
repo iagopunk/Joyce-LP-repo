@@ -33,8 +33,13 @@ O que mudou em Main.dc.html, FrenteB.dc.html, Back.dc.html e BackB.dc.html:
   (bairro Leaside). Substitui "627 Indian Road, Toronto" no verso.
 - **Frente**: a linha embaixo da logo, que dizia "Rolfing® Structural Integration · Toronto",
   virou "@joycecruvinel · joybyjoyce.com" (ela só tem Instagram ativo, sem Facebook).
-- **Verso**: a foto da sessão foi removida; no lugar entrou a logo pequena (mesmo arquivo
-  logo-joyce.webp, menor) dentro do mesmo painel curvo colorido.
+- **Verso**: a foto da sessão foi removida. Ela pediu "o logo pequeno, o pequenininho do lado".
+  Primeira tentativa (logo inteira dentro do painel curvo amarelo) ficou com amarelo forte
+  demais; o Iago achou estranho. Versão atual: sem painel e sem divisão colorida, só o
+  **anel da logo** (`assets/img/logo icone perfil.png`, convertido para `logo-anel.webp` no
+  canvas) com o mesmo glow suave da frente e uma linha fina dourada que some nas pontas.
+  Segue o "bem clean, o mais clean possível" dela, e a frente + o anel no verso cumprem o
+  "bota os dois logos pra pessoa bater o olho e ver que sou eu".
 - **Verso**: acrescentada a linha "Leaside Rolfing" abaixo de "Rolfing® Structural Integration".
   Confirmado com o Iago: é o nome que ela pretende usar no Google Meu Negocio (como
   "Leaside Pilates", outro estúdio do bairro) — por enquanto só no cartão, não no site. Decisão

@@ -166,6 +166,12 @@ strong { font-weight: 600; }
   font-size: 1.3em;
   letter-spacing: 0.1em;
 }
+/* Onde a linha não cabe inteira, a região desce para uma linha própria,
+   centrada, sem o "·" pendurado no fim da primeira. */
+@media (max-width: 900px) {
+  .eyebrow__sep { display: none; }
+  .eyebrow__place { display: block; margin-top: 4px; }
+}
 
 .section-title {
   font-size: clamp(26px, 4.4vw, 36px);
@@ -320,26 +326,52 @@ summary:focus-visible,
    Só a altura é fixada; a largura acompanha a proporção do arquivo. */
 .brand {
   display: inline-flex;
+  flex-direction: column;
   align-items: center;
+  gap: 3px;
   text-decoration: none;
   flex: none;
 }
+/* Alturas da logo descontam a linha "Leaside Rolfing" embaixo, para o
+   conjunto caber no mesmo --header-h de antes. */
 .brand-logo {
-  height: 77px;
+  height: 70px;
   width: auto;
   flex: none;
+}
+/* Nome do negócio (Google Business Profile) logo abaixo da arte da logo. */
+.brand-sub {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--header-fg);
+  white-space: nowrap;
 }
 @media (max-width: 900px) {
   /* A arte do PNG começa ~7px (na escala mobile) depois da borda esquerda do
      arquivo; a margem à direita compensa isso e centra a logo opticamente
-     dentro da metade dela. */
-  .brand-logo { height: 120px; margin-right: 7px; }
+     dentro da metade dela. A linha de baixo recebe a mesma margem para
+     ficar no eixo da arte. */
+  .brand-logo { height: 102px; margin-right: 7px; }
+  .brand-sub { font-size: 13px; margin-right: 7px; }
 }
-@media (max-width: 560px) { .brand-logo { height: 104px; } }
+@media (max-width: 560px) {
+  .brand-logo { height: 88px; }
+  .brand-sub { font-size: 12px; }
+}
 /* Telas estreitas: a logo tem que caber na metade da barra (largura ≈ 1,65x
    a altura), senão ela invade o lado do hambúrguer. */
-@media (max-width: 420px) { .brand-logo { height: 92px; } }
-@media (max-width: 360px) { .brand-logo { height: 84px; } }
+@media (max-width: 420px) {
+  .brand-logo { height: 78px; }
+  .brand-sub { font-size: 11px; letter-spacing: 0.16em; }
+}
+@media (max-width: 360px) {
+  .brand-logo { height: 70px; }
+  .brand-sub { font-size: 10px; }
+}
 
 /* ---- Menu de seções ----------------------------------------------------- */
 .site-nav__list {

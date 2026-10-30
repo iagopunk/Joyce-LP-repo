@@ -166,12 +166,10 @@ strong { font-weight: 600; }
   font-size: 1.3em;
   letter-spacing: 0.1em;
 }
-/* Onde a linha não cabe inteira, a região desce para uma linha própria,
-   centrada, sem o "·" pendurado no fim da primeira. */
-@media (max-width: 900px) {
-  .eyebrow__sep { display: none; }
-  .eyebrow__place { display: block; margin-top: 4px; }
-}
+/* A região fica numa linha própria, centrada, abaixo da modalidade, em
+   qualquer largura (sem o "·" separador). */
+.eyebrow__sep { display: none; }
+.eyebrow__place { display: block; margin-top: 4px; }
 
 .section-title {
   font-size: clamp(26px, 4.4vw, 36px);

@@ -19,7 +19,7 @@ Ler isto ANTES de mexer no cartão. O cartão vive como artifact, não neste rep
 
 - **Serviço no cartão: só Rolfing** (confirmado pelo Iago em 30/10/2026; já era a decisão dela em 28/10: "bem clean, só Rolfing mesmo"). Sem Pilates, nutrição etc.
 - **Nome:** "Leaside Rolfing" (com o bairro; ela fica em Leaside depois da mudança). O verso já traz essa linha.
-- **Verso B (30/10):** os dois bonecos do diagrama de postura (marca d'água a 8% de opacidade) saíram de trás do texto e foram para trás do anel da logo, no lado direito.
+- **Verso B (30/10):** os dois bonecos do diagrama de postura (marca d'água a 8% de opacidade) saíram de trás do texto e foram para trás do anel da logo, no lado direito. O anel fica na frente e tampa os bonecos (disco opaco na cor do cartão atrás dele); só o diagrama é transparente.
 
 > Link canônico do cartão hoje: https://claude.ai/artifact/A4Qtm6x8spBv85G5j4VBsZ (mesmo artifact da versão "com foto", só que o título é antigo).
 

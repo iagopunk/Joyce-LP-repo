@@ -347,7 +347,7 @@ summary:focus-visible,
   line-height: 1;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--header-fg);
+  color: var(--color-taupe);
   white-space: nowrap;
 }
 @media (max-width: 900px) {

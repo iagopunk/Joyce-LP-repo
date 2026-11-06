@@ -27,5 +27,37 @@ Ler isto ANTES de mexer no cartão. O cartão vive como artifact, não neste rep
 
 - Nada por enquanto.
 
-> Esse mesmo feedback também está registrado como anotação dentro do artifact,
-> acima da opção A no canvas.
+> As anotações de feedback que ficavam dentro do artifact foram tiradas em 06/11/2026
+> (poluíam o canvas que a Joyce usa para aprovar o cartão). O histórico completo está
+> abaixo, na seção "Histórico".
+
+## Estado do cartão (06/11/2026)
+
+- Opções **A e B** são as atuais (frente e verso), com o texto em 7 pt (10 px no canvas).
+- Opções **C e D** estão descartadas: dados antigos (sem endereço novo e sem Leaside Rolfing), e a C tem foto.
+- O artifact fica limpo, só com as opções para a Joyce escolher. Não recolocar anotações lá; registrar aqui.
+
+## Histórico — anotações que estavam no artifact (copiadas em 06/11/2026)
+
+```
+FEEDBACK DA JOYCE - 28/10 (aplicado nas opcoes A e B)
+Endereco novo (muda 01/11): 872 Millwood Rd #56, Toronto, ON M4G 1W9 (Leaside).
+So Rolfing no cartao, sem Pilates (decisao explicita dela: "bem clean, so Rolfing mesmo").
+Frente: trocou "Rolfing Structural Integration . Toronto" por @joycecruvinel . joybyjoyce.com.
+Verso: tirou a foto. Sem painel colorido: so o anel da logo pequeno (o "logo pequenininho" que ela pediu), com o glow suave da frente e uma linha fina separando. Acrescentou linha "Leaside Rolfing" (nome que ela vai usar no Google Meu Negocio).
+30/10: texto do cartao subiu para 7 pt (10px no canvas) nas opcoes A e B; so Rolfing confirmado.
+C e D ficaram com os dados antigos (sem endereco novo e sem Leaside Rolfing; a C tem foto) e foram movidas para "Versoes descartadas", la embaixo.
+
+FEEDBACK DA JOYCE — 13/09
+Foto: so a da mao, ou sem foto nenhuma. Ela prefere SEM foto; no maximo alguma coisa bem pequenininha num canto.
+Aprovado: o lado da logo e o QR code embaixo, do mesmo lado, igual nas primeiras opcoes. Manter assim.
+Pendente: ela ainda vai falar quais trabalhos entram no cartao (pilates, nutricao, etc.).
+```
+
+(O "Pendente" de 13/09 foi resolvido: só Rolfing, ver "Resolvido" acima.)
+
+## Contexto do site (registrado em 06/11/2026)
+
+- O site joybyjoyce.com está na **Netlify** (projeto "joybyjoycetemporary", deploy automático do GitHub). Merge na `main` publica.
+- O GitHub Pages deste repo publica a branch `preview` e não é o site de produção.
+- `styles.css` e `main.js` são carregados com `?v=AAAAMMDD` no `index.html`. Ao mudar CSS ou JS, atualizar esse número, senão visitantes recorrentes veem o HTML novo com CSS antigo em cache.

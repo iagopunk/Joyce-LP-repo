@@ -36,6 +36,7 @@ Ler isto ANTES de mexer no cartão. O cartão vive como artifact, não neste rep
 ## Estado do cartão (06/11/2026)
 
 - Opções **A e B** são as atuais (frente e verso), com o texto em 7 pt (10 px no canvas).
+- **Verso A (07/11):** layout em 2 colunas que se dividem no meio do cartão. Esquerda: nome, linha amarela horizontal e contatos. Direita: anel em cima e QR (74 px, ~18,5 mm, mesma largura do anel) embaixo, com "Scan to book a session". Sem linha vertical dourada. Motivo: o QR de 9,5 mm era pequeno demais para imprimir (a simulação falhava com impressão borrada). O verso B tem QR de 15 mm.
 - Opções **C e D** estão descartadas: dados antigos (sem endereço novo e sem Leaside Rolfing), e a C tem foto.
 - O artifact fica limpo, só com as opções para a Joyce escolher. Não recolocar anotações lá; registrar aqui.
 

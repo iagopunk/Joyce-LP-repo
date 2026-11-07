@@ -23,6 +23,8 @@ Ler isto ANTES de mexer no cartão. O cartão vive como artifact, não neste rep
 
 > Link canônico do cartão hoje: https://claude.ai/artifact/A4Qtm6x8spBv85G5j4VBsZ (mesmo artifact da versão "com foto", só que o título é antigo).
 
+- **QR (07/11):** agora aponta para `https://joybyjoyce.com/#contact` (seção de contato, onde ficam o formulário e os contatos), não para a home. Combina com a frase "Scan to book a session". QR versão 3 (29x29 módulos, correção M). Lê em simulação de impressão (borrada) a 18,5 mm (A) e a 15 mm (B). Se o domínio mudar, o redirecionamento do antigo precisa ficar pra sempre e preservar o `#contact`. O site não tem analytics, então não dá para medir escaneamentos; um `?utm_source=` deixaria o QR mais denso.
+
 ## Pendente com ela
 
 - Nada por enquanto.
@@ -34,6 +36,7 @@ Ler isto ANTES de mexer no cartão. O cartão vive como artifact, não neste rep
 ## Estado do cartão (06/11/2026)
 
 - Opções **A e B** são as atuais (frente e verso), com o texto em 7 pt (10 px no canvas).
+- **Verso A (07/11):** layout em 2 colunas que se dividem no meio do cartão. Esquerda: nome, linha amarela horizontal e contatos. Direita: anel em cima e QR (74 px, ~18,5 mm, mesma largura do anel) embaixo, com "Scan to book a session". Sem linha vertical dourada. Motivo: o QR de 9,5 mm era pequeno demais para imprimir (a simulação falhava com impressão borrada). O verso B tem QR de 15 mm.
 - Opções **C e D** estão descartadas: dados antigos (sem endereço novo e sem Leaside Rolfing), e a C tem foto.
 - O artifact fica limpo, só com as opções para a Joyce escolher. Não recolocar anotações lá; registrar aqui.
 
